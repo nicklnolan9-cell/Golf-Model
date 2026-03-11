@@ -992,11 +992,9 @@ function renderTable(data){
     tr.innerHTML=`
       <td class="rank ${rCls}">${r.rank}</td>
       <td class="player-name">${dispName(r.name)}${histTag(r.hist)}</td>
-      <td class="right"><div class="score-cell"><div class="score-bar-bg"><div class="score-bar-fill" style="width:${bw}%"></div></div><span class="score-num" style="color:${r.rank===1?'var(--gold)':r.rank<=3?'var(--muted2)':'var(--text)'}">${r.s.toFixed(2)}</span></div></td>
-      ${sgFmt(r.app)}${sgFmt(r.t2g)}${sgFmt(r.putt)}${sgFmt(r.ott)}${sgFmt(r.arg)}
+      ${sgFmt(r.app)}${sgFmt(r.t2g)}${sgFmt(r.putt)}
       <td class="right"><span class="pill ${pillClass(r.t10)}">${pct(r.t10)}%</span></td>
       <td class="right odds-disp">${oddsDisp(r.t10odds)}</td>
-      <td class="right mkt-imp">${pct(r.mktImp)}%</td>
       <td class="right ${edgeClass(r.edge)}">${r.edge>0?'+':''}${pct(r.edge)}%</td>
       <td>${signalBadge(r.edge)}</td>
     `;
