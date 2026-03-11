@@ -291,6 +291,13 @@ body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif
    TABLE — scorecard aesthetic
 ══════════════════════════════════════ */
 .table-wrap { padding:14px 36px 40px; overflow-x:auto; }
+/* Sticky first two columns */
+th:nth-child(1), td:nth-child(1) { position:sticky; left:0; z-index:2; background:var(--surface); min-width:32px; }
+th:nth-child(2), td:nth-child(2) { position:sticky; left:32px; z-index:2; background:var(--surface); min-width:120px; }
+tbody tr:hover th:nth-child(1), tbody tr:hover td:nth-child(1),
+tbody tr:hover th:nth-child(2), tbody tr:hover td:nth-child(2) { background:var(--surface2); }
+tbody tr.top-val td:nth-child(1), tbody tr.top-val td:nth-child(2) { background:#0e1f12; }
+tbody tr.is-fade td:nth-child(1), tbody tr.is-fade td:nth-child(2) { background:#1a0e0e; }
 table { width:100%; border-collapse:collapse; }
 thead tr {
   background: linear-gradient(180deg, var(--surface2) 0%, var(--surface) 100%);
@@ -507,6 +514,27 @@ th.sorted.asc::after { content:' ▲'; }
   td { padding:11px 8px; font-size:13px; }
   .score-bar-bg { display:none; }
   .score-num { font-size:15px; }
+  /* Sticky rank + player on mobile */
+  th:nth-child(1), td:nth-child(1) {
+    position:sticky; left:0; z-index:3;
+    background:var(--bg);
+    min-width:28px; max-width:28px;
+    padding-left:10px;
+    box-shadow:2px 0 4px rgba(0,0,0,.3);
+  }
+  th:nth-child(2), td:nth-child(2) {
+    position:sticky; left:38px; z-index:3;
+    background:var(--bg);
+    min-width:110px; max-width:110px;
+    white-space:normal;
+    box-shadow:2px 0 6px rgba(0,0,0,.4);
+  }
+  tbody tr.top-val td:nth-child(1),
+  tbody tr.top-val td:nth-child(2) { background:#0d1f14; }
+  tbody tr.is-fade td:nth-child(1),
+  tbody tr.is-fade td:nth-child(2) { background:#1a0e0e; }
+  tbody tr:hover td:nth-child(1),
+  tbody tr:hover td:nth-child(2) { background:var(--surface2); }
 
   .val-cards { grid-template-columns:1fr; padding:0 14px 24px; }
   .sec-hdr { padding:18px 14px 8px; }
@@ -767,13 +795,13 @@ th.sorted.asc::after { content:' ▲'; }
       <thead><tr>
         <th onclick="sortTable(0)">#</th>
         <th onclick="sortTable(1)">Player</th>
-        <th class="right" onclick="sortTable(3)">App</th>
-        <th class="right" onclick="sortTable(4)">T2G</th>
-        <th class="right" onclick="sortTable(5)">Putt</th>
-        <th class="right" onclick="sortTable(8)">Mdl T10%</th>
-        <th class="right" onclick="sortTable(9)">Odds</th>
-        <th class="right" onclick="sortTable(11)">Edge</th>
-        <th onclick="sortTable(12)">Signal</th>
+        <th class="right" onclick="sortTable(2)">App</th>
+        <th class="right" onclick="sortTable(3)">T2G</th>
+        <th class="right" onclick="sortTable(4)">Putt</th>
+        <th class="right" onclick="sortTable(5)">Mdl T10%</th>
+        <th class="right" onclick="sortTable(6)">Odds</th>
+        <th class="right" onclick="sortTable(7)">Edge</th>
+        <th onclick="sortTable(8)">Signal</th>
       </tr></thead>
       <tbody id="main-tbody"></tbody>
     </table>
