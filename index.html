@@ -467,29 +467,46 @@ th.sorted.asc::after { content:' ▲'; }
    MOBILE
 ══════════════════════════════════════ */
 @media(max-width:680px){
-  .hero-right { display:none; }
-  .hero-layout { min-height:auto; }
-  .hero-left { padding:22px 18px 18px; border-right:none; }
-  .brand-title { font-size:42px; }
-  .brand-row { gap:14px; }
-  .crest-logo { width:48px; height:54px; }
+  /* Stack hero vertically so island green shows below the text */
+  .hero-layout { flex-direction:column; min-height:auto; }
+  .hero-left { padding:20px 18px 16px; border-right:none; border-bottom:1px solid rgba(201,168,76,.12); }
+  .brand-title { font-size:40px; }
+  .brand-row { gap:12px; }
+  .crest-logo { width:46px; height:52px; }
+
+  /* Show island green full-width centered */
+  .hero-right {
+    display:flex;
+    width:100%;
+    padding:18px 18px 22px;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background:radial-gradient(ellipse at center, rgba(14,40,20,.5) 0%, transparent 70%);
+  }
+  .island-svg-wrap svg { width:200px; height:145px; }
+  .hero-chips { margin-top:12px; gap:6px; }
+  .chip { font-size:8.5px; padding:4px 12px; }
+  .island-label { font-size:7.5px; }
 
   .summary-strip { flex-direction:column; }
-  .strip-item { border-right:none; border-bottom:1px solid var(--border); padding:11px 18px; }
+  .strip-item { border-right:none; border-bottom:1px solid var(--border); padding:12px 18px; }
   .strip-item:last-child { border-bottom:none; }
+  .strip-value { font-size:22px; }
 
   .method-row { display:none; }
   .ball-divider { display:none; }
 
-  .tabs { padding:0 14px; }
+  .tabs { padding:0 12px; }
   .tabs::before { display:none; }
-  .tab { padding:10px 14px; font-size:10px; }
+  .tab { padding:11px 13px; font-size:10.5px; }
 
-  .note-bar { margin:12px 14px 0; }
-  .table-wrap { margin: 10px 0 30px !important; border-radius: 0 !important; }
-  th, td { padding:7px 6px; font-size:11px; }
+  .note-bar { margin:12px 14px 0; font-size:12px; }
+  .table-wrap { margin:10px 0 30px !important; border-radius:0 !important; }
+  th { padding:10px 8px; font-size:10px; }
+  td { padding:11px 8px; font-size:13px; }
   .score-bar-bg { display:none; }
-  .score-num { font-size:14px; }
+  .score-num { font-size:15px; }
 
   .val-cards { grid-template-columns:1fr; padding:0 14px 24px; }
   .sec-hdr { padding:18px 14px 8px; }
@@ -750,15 +767,11 @@ th.sorted.asc::after { content:' ▲'; }
       <thead><tr>
         <th onclick="sortTable(0)">#</th>
         <th onclick="sortTable(1)">Player</th>
-        <th class="right" onclick="sortTable(2)">Score</th>
         <th class="right" onclick="sortTable(3)">App</th>
         <th class="right" onclick="sortTable(4)">T2G</th>
         <th class="right" onclick="sortTable(5)">Putt</th>
-        <th class="right" onclick="sortTable(6)">OTT</th>
-        <th class="right" onclick="sortTable(7)">ARG</th>
         <th class="right" onclick="sortTable(8)">Mdl T10%</th>
-        <th class="right" onclick="sortTable(9)">T10 Odds</th>
-        <th class="right" onclick="sortTable(10)">Mkt%</th>
+        <th class="right" onclick="sortTable(9)">Odds</th>
         <th class="right" onclick="sortTable(11)">Edge</th>
         <th onclick="sortTable(12)">Signal</th>
       </tr></thead>
@@ -969,7 +982,7 @@ let sortCol=0,sortAsc=false;
 function sortTable(col){
   if(sortCol===col)sortAsc=!sortAsc;else{sortCol=col;sortAsc=false;}
   document.querySelectorAll('th').forEach((th,i)=>{th.classList.remove('sorted','asc');if(i===col){th.classList.add('sorted');if(sortAsc)th.classList.add('asc');}});
-  const getVal=(r,c)=>[r.rank,r.name,r.s,r.app,r.t2g,r.putt,r.ott,r.arg,r.t10,r.t10odds,r.mktImp,r.edge,0][c];
+  const getVal=(r,c)=>[r.rank,r.name,r.app,r.t2g,r.putt,r.t10,r.t10odds,r.edge,0][c];
   const sorted=[...rows].sort((a,b)=>{const va=getVal(a,col),vb=getVal(b,col);if(typeof va==='string')return sortAsc?va.localeCompare(vb):vb.localeCompare(va);return sortAsc?va-vb:vb-va;});
   renderTable(sorted);
 }
