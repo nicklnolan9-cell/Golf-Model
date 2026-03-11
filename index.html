@@ -7,11 +7,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:#060a07;
-  --surface:#0c1210;
-  --surface2:#111a14;
-  --surface3:#162019;
-  --border:#1e2e22;
+  --bg:#0f1117;
+  --surface:#161b26;
+  --surface2:#1c2233;
+  --surface3:#222840;
+  --border:#2a3248;
   --gold:#c9a84c;
   --gold-light:#e8cc7a;
   --gold-dim:#8a6e30;
@@ -19,9 +19,9 @@
   --blue:#4caacc;
   --red:#e05252;
   --orange:#e08c3a;
-  --text:#d8e4da;
-  --muted:#3d5442;
-  --muted2:#6b8a72;
+  --text:#dde6f0;
+  --muted:#4a5a78;
+  --muted2:#7a90b0;
   --fairway:#1a3d22;
   --rough:#0f2614;
 }
@@ -36,7 +36,7 @@ body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif
 .hero {
   position:relative;
   min-height:260px;
-  background: linear-gradient(135deg, #020805 0%, #061210 35%, #04100c 65%, #060a06 100%);
+  background: linear-gradient(135deg, #0a0d14 0%, #0e1420 35%, #0c1220 65%, #0a0d14 100%);
   overflow:hidden;
   border-bottom: 1px solid var(--border);
 }
@@ -48,8 +48,8 @@ body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif
     -15deg,
     transparent 0px,
     transparent 28px,
-    #2d7040 28px,
-    #2d7040 56px
+    #1e3060 28px,
+    #1e3060 56px
   );
   animation: stripeDrift 20s linear infinite;
 }
@@ -63,8 +63,8 @@ body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif
   pointer-events:none;
 }
 .ring1 { width:500px; height:500px; top:-200px; right:-150px; }
-.ring2 { width:340px; height:340px; top:-120px; right:-60px; border-color:rgba(201,168,76,.12); }
-.ring3 { width:180px; height:180px; top:-40px; right:60px; border-color:rgba(201,168,76,.18); }
+.ring2 { width:340px; height:340px; top:-120px; right:-60px; border-color:rgba(201,168,76,.15); }
+.ring3 { width:180px; height:180px; top:-40px; right:60px; border-color:rgba(201,168,76,.22); }
 
 /* Left gold bar accent */
 .hero::before {
@@ -110,7 +110,7 @@ body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif
   font-family:'Bebas Neue',sans-serif;
   font-size:58px; letter-spacing:.04em; line-height:.92;
   color:#fff;
-  text-shadow: 0 0 60px rgba(201,168,76,.12);
+  text-shadow: 0 0 60px rgba(201,168,76,.15);
 }
 .brand-title em {
   color:var(--gold);
@@ -168,8 +168,8 @@ body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif
   display:flex; gap:8px; margin-top:16px; flex-wrap:wrap; justify-content:center;
 }
 .chip {
-  background: rgba(201,168,76,.06);
-  border:1px solid rgba(201,168,76,.15);
+  background: rgba(201,168,76,.07);
+  border:1px solid rgba(201,168,76,.18);
   border-radius:20px;
   padding:4px 12px;
   font-family:'DM Mono',monospace;
@@ -227,7 +227,7 @@ body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif
    METHOD BAR
 ══════════════════════════════════════ */
 .method-row {
-  background:#050908;
+  background:#0a0d14;
   border-bottom:1px solid var(--border);
   padding:10px 36px;
   display:flex; gap:24px; align-items:center; flex-wrap:wrap;
@@ -278,8 +278,8 @@ body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif
 ══════════════════════════════════════ */
 .note-bar {
   margin:16px 36px 0;
-  background:rgba(201,168,76,.04);
-  border:1px solid rgba(201,168,76,.12);
+  background:rgba(201,168,76,.05);
+  border:1px solid rgba(201,168,76,.15);
   border-left:3px solid var(--gold);
   border-radius:0 4px 4px 0;
   padding:10px 14px;
@@ -312,8 +312,8 @@ tbody tr {
 tbody tr:hover { background:var(--surface2); }
 tbody tr.top-val { background:rgba(61,220,132,.04); }
 tbody tr.top-val:hover { background:rgba(61,220,132,.08); }
-tbody tr.is-fade { background:rgba(224,82,82,.03); }
-tbody tr.is-fade:hover { background:rgba(224,82,82,.06); }
+tbody tr.is-fade { background:rgba(224,82,82,.04); }
+tbody tr.is-fade:hover { background:rgba(224,82,82,.07); }
 td { padding:10px; font-size:13px; vertical-align:middle; }
 td.mono { font-family:'DM Mono',monospace; font-size:12px; }
 
@@ -347,7 +347,7 @@ td.mono { font-family:'DM Mono',monospace; font-size:12px; }
 .p-hi { background:rgba(61,220,132,.12); color:var(--green); }
 .p-md { background:rgba(76,170,204,.12); color:var(--blue); }
 .p-lo { background:rgba(107,138,114,.1); color:var(--muted2); }
-.p-vlo { background:rgba(61,84,66,.08); color:var(--muted); }
+.p-vlo { background:rgba(90,102,112,.10); color:var(--muted); }
 
 .mkt-imp { font-family:'DM Mono',monospace; font-size:12px; color:var(--muted2); }
 .edge-pos { font-family:'DM Mono',monospace; font-size:12px; font-weight:600; color:var(--green); }
@@ -486,7 +486,7 @@ th.sorted.asc::after { content:' ▲'; }
   .tab { padding:10px 14px; font-size:10px; }
 
   .note-bar { margin:12px 14px 0; }
-  .table-wrap { padding:10px 0 30px; }
+  .table-wrap { margin: 10px 0 30px !important; border-radius: 0 !important; }
   th, td { padding:7px 6px; font-size:11px; }
   .score-bar-bg { display:none; }
   .score-num { font-size:14px; }
@@ -543,8 +543,8 @@ th.sorted.asc::after { content:' ▲'; }
             <text x="32" y="60" text-anchor="middle" font-size="7" fill="rgba(201,168,76,.5)" font-family="sans-serif">★ ★ ★</text>
             <defs>
               <linearGradient id="shieldGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#0d2218"/>
-                <stop offset="100%" stop-color="#060e09"/>
+                <stop offset="0%" stop-color="#0d1830"/>
+                <stop offset="100%" stop-color="#060810"/>
               </linearGradient>
               <radialGradient id="ballGrad" cx="40%" cy="35%">
                 <stop offset="0%" stop-color="#e8e8e8"/>
@@ -617,7 +617,7 @@ th.sorted.asc::after { content:' ▲'; }
 
       <!-- Model badges row -->
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;">
-        <span style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:4px 12px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;">DataGolf SG 2026</span>
+        <span style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);border-radius:4px;padding:4px 12px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;">DataGolf SG 2026</span>
         <span style="background:rgba(61,220,132,.06);border:1px solid rgba(61,220,132,.15);border-radius:4px;padding:4px 12px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--green);text-transform:uppercase;">Exact Odds Loaded</span>
         <span style="background:rgba(76,170,204,.06);border:1px solid rgba(76,170,204,.15);border-radius:4px;padding:4px 12px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--blue);text-transform:uppercase;">Live Edge Calc</span>
         <span style="background:rgba(224,82,82,.05);border:1px solid rgba(224,82,82,.15);border-radius:4px;padding:4px 12px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--red);text-transform:uppercase;">Dead-Heat Applied</span>
@@ -691,7 +691,7 @@ th.sorted.asc::after { content:' ▲'; }
           <line x1="5" y1="112" x2="215" y2="112" stroke="#0d3550" stroke-width=".5" opacity=".4"/>
 
           <!-- Reflection of flag in water -->
-          <line x1="112" y1="112" x2="112" y2="125" stroke="rgba(201,168,76,.15)" stroke-width="1"/>
+          <line x1="112" y1="112" x2="112" y2="125" stroke="rgba(201,168,76,.18)" stroke-width="1"/>
 
           <!-- Label -->
           <text x="110" y="152" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7.5" fill="#3d5442" letter-spacing="2.5">TPC SAWGRASS</text>
