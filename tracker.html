@@ -379,17 +379,41 @@ async function fetchScores() {
     document.getElementById('last-updated').textContent = 'Updated ' + new Date().toLocaleTimeString();
   } catch(e) {
     console.warn('Scores fetch failed:', e);
-    // Fallback: try allorigins as backup
+    // Try to read the error body from Netlify function for diagnosis
     try {
-      const espnUrl = 'https://site.api.espn.com/apis/site/v2/sports/golf/pga/scoreboard';
-      const proxy   = 'https://api.allorigins.win/get?url=' + encodeURIComponent(espnUrl);
-      const res2    = await fetch(proxy, { cache: 'no-store' });
-      const wrap    = await res2.json();
-      const data2   = JSON.parse(wrap.contents);
-      parseESPN(data2);
-      setBadge('live', 'Live (fallback)');
-      document.getElementById('last-updated').textContent = 'Updated ' + new Date().toLocaleTimeString();
-    } catch(e2) {
+      const diagRes = await fetch('/.netlify/functions/scores', { cache: 'no-store' });
+      const diagBody = await diagRes.text();
+      console.warn('[DIAG] Netlify function response status:', diagRes.status);
+      console.warn('[DIAG] Netlify function body:', diagBody.slice(0, 500));
+    } catch(d) {}
+    // Fallback: try allorigins proxy with multiple ESPN golf URLs
+    const fallbackUrls = [
+      'https://site.api.espn.com/apis/site/v2/sports/golf/pga/scoreboard',
+      'https://site.api.espn.com/apis/site/v2/sports/golf/pga/leaderboard',
+      'https://cdn.espn.com/core/golf/leaderboard?xhr=1',
+    ];
+    let fallbackOk = false;
+    for (const espnUrl of fallbackUrls) {
+      try {
+        console.log('[FALLBACK] Trying:', espnUrl);
+        const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(espnUrl);
+        const res2 = await fetch(proxy, { cache: 'no-store' });
+        const wrap = await res2.json();
+        console.log('[FALLBACK] allorigins status:', wrap.status?.http_code, 'for', espnUrl);
+        if (wrap.contents) {
+          const data2 = JSON.parse(wrap.contents);
+          console.log('[FALLBACK] parsed keys:', Object.keys(data2).join(', '));
+          parseESPN(data2);
+          setBadge('live', 'Live (fallback)');
+          document.getElementById('last-updated').textContent = 'Updated ' + new Date().toLocaleTimeString();
+          fallbackOk = true;
+          break;
+        }
+      } catch(e2) {
+        console.warn('[FALLBACK] failed for', espnUrl, ':', e2.message);
+      }
+    }
+    if (!fallbackOk) {
       setBadge('error', 'Offline');
       document.getElementById('error-banner').classList.add('show');
     }
@@ -399,47 +423,71 @@ async function fetchScores() {
 
 function parseESPN(data) {
   liveScores = {};
-  const events = data.events || [];
-  // Find The Players (event name match)
-  let event = events.find(e => /players/i.test(e.name)) || events[0];
-  if(!event) return;
 
-  const comps = event.competitions || [];
-  const comp  = comps[0];
-  if(!comp) return;
+  // ESPN golf leaderboard — competitors live at data.events[0].competitions[0].competitors
+  // OR at data.competitors directly depending on endpoint
+  let competitors = [];
 
-  const competitors = comp.competitors || [];
-  // Assign live leaderboard positions
+  if(data.events && data.events.length) {
+    const ev = data.events.find(e => /players/i.test(e.name||'')) || data.events[0];
+    const comp = (ev.competitions || [])[0];
+    competitors = (comp && comp.competitors) || [];
+  } else if(data.competitions && data.competitions.length) {
+    competitors = data.competitions[0].competitors || [];
+  } else if(data.competitors) {
+    competitors = data.competitors;
+  }
+
+  console.log('[ESPN] competitors found:', competitors.length);
+  if(competitors.length > 0) console.log('[ESPN] sample:', JSON.stringify(competitors[0]).slice(0,300));
+
   competitors.forEach((c, idx) => {
-    const espnName = c.athlete ? (c.athlete.displayName || '') : '';
+    // Name can be in athlete.displayName or athlete.fullName
+    const ath = c.athlete || c;
+    const espnName = ath.displayName || ath.fullName || ath.name || '';
     const p = matchPlayer(espnName);
-    if(!p) return;
+    if(!p) { console.log('[ESPN] no match for:', espnName); return; }
 
-    const stats   = c.statistics || [];
-    const score   = c.score || '0';      // total score to par as string e.g. "-4"
-    const thruRaw = c.status ? c.status.thru : null;
-    const today   = stats.find(s => s.name === 'roundScore')?.displayValue || '';
-    const status  = c.status ? c.status.type?.description : 'scheduled';
-
-    // Score parsing
+    // Score to par — ESPN uses c.score as a string like "-5", "E", "+2"
     let scorePar = 0;
-    if(score === 'E') scorePar = 0;
-    else { const n = parseInt(score); if(!isNaN(n)) scorePar = n; }
+    const scoreVal = String(c.score || '0').trim();
+    if(scoreVal === 'E' || scoreVal === 'even' || scoreVal === '0') scorePar = 0;
+    else { const n = parseInt(scoreVal); if(!isNaN(n)) scorePar = n; }
 
-    liveScores[p.raw] = {
-      score: scorePar,
-      thru: thruRaw,
-      today: today,
-      status: status || 'scheduled',
-      espnPos: parseInt(c.order || idx+1),
-    };
+    // Thru holes — ESPN scoreboard stores round holes in c.linescores[0].linescores (nested)
+    let thruRaw = null;
+    const r1 = c.linescores && c.linescores[0];
+    if(r1) {
+      // nested linescores array = individual holes played
+      const holes = r1.linescores;
+      if(holes && holes.length) {
+        thruRaw = holes.length; // number of holes completed
+        // if all 18 holes present, mark as F
+        if(thruRaw >= 18) thruRaw = 18;
+      }
+    }
+    if(thruRaw === null && c.thru !== undefined) thruRaw = c.thru;
+
+    // Today's round score — r1.displayValue is like "-5", "E", "+2"
+    let today = '';
+    if(r1 && r1.displayValue) {
+      today = r1.displayValue;
+    } else if(c.today !== undefined) {
+      today = String(c.today);
+    }
+
+    // Status
+    const status = (c.status && c.status.type && c.status.type.description) || 
+                   (c.status && c.status.displayValue) || 'scheduled';
+
+    liveScores[p.raw] = { score: scorePar, thru: thruRaw, today, status, espnPos: idx+1 };
   });
 
-  // Now assign r1pos based on score sort
-  const ranked = FIELD
-    .filter(p => liveScores[p.raw])
-    .sort((a,b) => liveScores[a.raw].score - liveScores[b.raw].score);
+  console.log('[ESPN] matched players:', Object.keys(liveScores).length);
 
+  // Assign r1pos
+  const ranked = FIELD.filter(p => liveScores[p.raw])
+    .sort((a,b) => liveScores[a.raw].score - liveScores[b.raw].score);
   let pos = 1;
   for(let i = 0; i < ranked.length; i++) {
     if(i > 0 && liveScores[ranked[i].raw].score === liveScores[ranked[i-1].raw].score) {
