@@ -497,7 +497,11 @@ function renderTable() {
   if(currentFilter === 'late')    data = data.filter(p => p.wave === 'late');
   if(currentFilter === 'playing') data = data.filter(p => {
     const s = liveScores[p.raw];
-    return s && s.status && /progress|active|in/i.test(s.status);
+    if(!s) return false;
+    // Playing = has a score AND not finished (thru < 18 and not null)
+    const notFinished = !(/complete|final/i.test(s.status||'')) && s.thru !== 18;
+    const hasStarted = s.thru !== null && s.thru !== undefined && s.thru > 0;
+    return hasStarted && notFinished;
   });
 
   if(searchTerm) data = data.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
