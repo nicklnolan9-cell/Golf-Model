@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Players 2026 — R1 Live Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1117;--surface:#161b26;--surface2:#1c2233;--border:#2a3248;
+  --gold:#c9a84c;--green:#3ddc84;--red:#e05252;--blue:#4caacc;--orange:#e08c3a;
+  --text:#dde6f0;--muted:#4a5a78;--muted2:#7a90b0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;}
+
+/* HEADER */
+.header{
+  background:linear-gradient(135deg,#0a0d14 0%,#0e1420 60%,#0a0d14 100%);
+  border-bottom:2px solid var(--gold);
+  padding:16px 24px;display:flex;align-items:center;gap:16px;position:relative;overflow:hidden;
+}
+.header::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%);}
+.header-text{flex:1;}
+.header-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:3px;}
+.header-title{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:.04em;line-height:1;color:#fff;}
+.header-title em{color:var(--gold);font-style:normal;}
+.header-sub{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:.07em;margin-top:3px;}
+.header-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;}
+.live-badge{
+  background:rgba(61,220,132,.1);border:1px solid rgba(61,220,132,.3);
+  border-radius:20px;padding:4px 12px;
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;
+  color:var(--green);text-transform:uppercase;display:flex;align-items:center;gap:6px;
+}
+.live-badge.fetching{border-color:rgba(201,168,76,.3);color:var(--gold);background:rgba(201,168,76,.08);}
+.live-badge.error{border-color:rgba(224,82,82,.3);color:var(--red);background:rgba(224,82,82,.07);}
+.live-dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:pulse 1.5s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.last-updated{font-family:'DM Mono',monospace;font-size:8px;color:var(--muted);}
+.refresh-btn{
+  background:transparent;border:1px solid var(--border);border-radius:3px;
+  padding:3px 10px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.1em;
+  color:var(--muted2);cursor:pointer;text-transform:uppercase;transition:all .15s;
+}
+.refresh-btn:hover{border-color:var(--gold);color:var(--gold);}
+
+/* SUMMARY BAR */
+.summary-bar{display:flex;background:var(--surface);border-bottom:1px solid var(--border);}
+.sbar-item{flex:1;padding:10px 16px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:2px;}
+.sbar-item:last-child{border-right:none;}
+.sbar-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.sbar-val{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.04em;line-height:1.1;}
+
+/* CONTROLS */
+.controls{
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:10px 24px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+}
+.ctrl-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;}
+.filter-btn{
+  background:transparent;border:1px solid var(--border);border-radius:4px;
+  padding:5px 13px;font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:.07em;color:var(--muted2);cursor:pointer;transition:all .15s;text-transform:uppercase;
+}
+.filter-btn.active{background:rgba(201,168,76,.1);border-color:var(--gold);color:var(--gold);}
+.filter-btn:hover:not(.active){border-color:var(--muted2);color:var(--text);}
+.search-wrap{margin-left:auto;position:relative;}
+.search-input{
+  background:var(--surface2);border:1px solid var(--border);border-radius:4px;
+  padding:6px 12px 6px 30px;font-family:'DM Sans',sans-serif;font-size:12px;
+  color:var(--text);width:190px;outline:none;
+}
+.search-input::placeholder{color:var(--muted);}
+.search-input:focus{border-color:var(--gold);}
+.search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);opacity:.4;}
+
+/* ERROR BANNER */
+.error-banner{
+  display:none;background:rgba(224,82,82,.07);border-bottom:1px solid rgba(224,82,82,.2);
+  padding:8px 24px;font-family:'DM Mono',monospace;font-size:11px;color:var(--red);
+}
+.error-banner.show{display:block;}
+
+/* TABLE */
+.table-wrap{padding:10px 24px 40px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+thead tr{background:var(--surface);border-bottom:2px solid var(--border);}
+th{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);padding:10px 10px;
+  text-align:left;white-space:nowrap;cursor:pointer;user-select:none;
+}
+th:hover{color:var(--text);}
+th.right,td.right{text-align:right;}
+th.center,td.center{text-align:center;}
+tbody tr{border-bottom:1px solid rgba(42,50,72,.5);transition:background .1s;}
+tbody tr:hover{background:var(--surface2);}
+tbody tr.row-value{background:rgba(61,220,132,.04);}
+tbody tr.row-value:hover{background:rgba(61,220,132,.09);}
+tbody tr.row-fade{background:rgba(224,82,82,.03);}
+td{padding:10px;font-size:13px;vertical-align:middle;}
+
+/* CELLS */
+.pos{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);}
+.pos.p1{color:var(--gold);font-weight:700;font-size:14px;}
+.pos.p2{color:#c0c8d8;font-weight:600;}
+.pos.p3{color:var(--muted2);}
+.player-cell{display:flex;flex-direction:column;gap:2px;}
+.player-name{font-weight:500;font-size:13px;}
+.player-meta{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted2);}
+.wave-early{color:var(--blue);}
+.wave-late{color:var(--orange);}
+
+.score-val{font-family:'DM Mono',monospace;font-size:13px;font-weight:600;}
+.score-under{color:var(--green);}
+.score-over{color:var(--red);}
+.score-even{color:var(--muted2);}
+.score-ns{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);}
+
+/* thru column */
+.thru{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted2);}
+.thru.active{color:var(--green);}
+.thru.done{color:var(--muted);}
+
+.rank-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:21px;border-radius:3px;
+  font-family:'DM Mono',monospace;font-size:10px;font-weight:500;
+}
+.rb-model{background:rgba(201,168,76,.12);color:var(--gold);}
+.rb-dg{background:rgba(76,170,204,.1);color:var(--blue);}
+
+.move{display:flex;align-items:center;justify-content:center;gap:3px;font-family:'DM Mono',monospace;font-size:11px;font-weight:600;}
+.move-up{color:var(--green);}
+.move-dn{color:var(--red);}
+.move-flat{color:var(--muted);}
+
+.sig-chip{
+  display:inline-block;font-family:'DM Mono',monospace;
+  font-size:8.5px;letter-spacing:.07em;text-transform:uppercase;
+  padding:2px 7px;border-radius:10px;border:1px solid;
+}
+.sig-value{border-color:rgba(61,220,132,.3);color:var(--green);background:rgba(61,220,132,.08);}
+.sig-fade{border-color:rgba(224,82,82,.3);color:var(--red);background:rgba(224,82,82,.07);}
+.sig-watch{border-color:var(--border);color:var(--muted);}
+
+/* COUNTDOWN */
+.refresh-countdown{font-family:'DM Mono',monospace;font-size:8px;color:var(--muted);margin-top:1px;}
+
+@media(max-width:640px){
+  .header{padding:12px 14px;gap:10px;}
+  .header-title{font-size:22px;}
+  .header-right .refresh-btn{display:none;}
+  .summary-bar{flex-wrap:wrap;}
+  .sbar-item{flex:1 1 50%;border-bottom:1px solid var(--border);}
+  .controls{padding:8px 12px;gap:7px;}
+  .search-wrap{margin-left:0;width:100%;}
+  .search-input{width:100%;}
+  .table-wrap{padding:8px 0 30px;}
+  th,td{padding:8px 6px;font-size:11px;}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <svg width="40" height="46" viewBox="0 0 44 50" fill="none" style="flex-shrink:0;filter:drop-shadow(0 0 8px rgba(201,168,76,.35))">
+    <path d="M3 4L22 1.5L41 4V28Q41 43 22 48Q3 43 3 28Z" fill="url(#hg)" stroke="#c9a84c" stroke-width="1"/>
+    <rect x="21" y="8" width="1.5" height="16" fill="#c9a84c" rx=".75"/>
+    <path d="M22.5 8L32 12L22.5 17Z" fill="#c9a84c" opacity=".9"/>
+    <circle cx="22" cy="30" r="6" fill="url(#bg2)" stroke="rgba(201,168,76,.4)" stroke-width=".6"/>
+    <defs>
+      <linearGradient id="hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0d1830"/><stop offset="100%" stop-color="#060810"/></linearGradient>
+      <radialGradient id="bg2" cx="40%" cy="35%"><stop offset="0%" stop-color="#e0e0e0"/><stop offset="100%" stop-color="#6a7a7a"/></radialGradient>
+    </defs>
+  </svg>
+  <div class="header-text">
+    <div class="header-eyebrow">Live R1 Tracker · Mar 12–13, 2026</div>
+    <div class="header-title">THE <em>PLAYERS</em> 2026</div>
+    <div class="header-sub">TPC Sawgrass · Auto-refreshes every 60s · vs. Pre-Tournament Model</div>
+  </div>
+  <div class="header-right">
+    <div class="live-badge" id="live-badge"><div class="live-dot"></div><span id="live-text">Connecting...</span></div>
+    <div class="last-updated" id="last-updated">—</div>
+    <div class="refresh-countdown" id="countdown"></div>
+    <button class="refresh-btn" onclick="fetchScores()">↻ Refresh Now</button>
+  </div>
+</div>
+
+<div class="summary-bar">
+  <div class="sbar-item"><div class="sbar-label">Leader</div><div class="sbar-val" id="sb-leader">—</div></div>
+  <div class="sbar-item"><div class="sbar-label">Best Value Pick</div><div class="sbar-val" style="color:var(--green)" id="sb-value">—</div></div>
+  <div class="sbar-item"><div class="sbar-label">Biggest Mover ↑</div><div class="sbar-val" style="color:var(--green)" id="sb-up">—</div></div>
+  <div class="sbar-item"><div class="sbar-label">Biggest Mover ↓</div><div class="sbar-val" style="color:var(--red)" id="sb-dn">—</div></div>
+  <div class="sbar-item"><div class="sbar-label">Completed</div><div class="sbar-val" id="sb-done">0 / 123</div></div>
+</div>
+
+<div class="controls">
+  <span class="ctrl-label">Filter</span>
+  <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+  <button class="filter-btn" onclick="setFilter('value',this)">★ Value</button>
+  <button class="filter-btn" onclick="setFilter('fade',this)">✕ Fades</button>
+  <button class="filter-btn" onclick="setFilter('early',this)">Early Wave</button>
+  <button class="filter-btn" onclick="setFilter('late',this)">Late Wave</button>
+  <button class="filter-btn" onclick="setFilter('playing',this)">⚡ Playing Now</button>
+  <div class="search-wrap">
+    <svg class="search-icon" width="13" height="13" viewBox="0 0 14 14" fill="none">
+      <circle cx="6" cy="6" r="4.5" stroke="#7a90b0" stroke-width="1.2"/>
+      <line x1="9.5" y1="9.5" x2="13" y2="13" stroke="#7a90b0" stroke-width="1.2" stroke-linecap="round"/>
+    </svg>
+    <input class="search-input" type="text" placeholder="Search player..." oninput="setSearch(this.value)">
+  </div>
+</div>
+
+<div class="error-banner" id="error-banner">
+  ⚠ Could not reach scoring API. Scores may be stale — will retry in 60s. Check your network or try refreshing.
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead><tr>
+      <th class="center" onclick="sortBy('r1pos')">Pos</th>
+      <th onclick="sortBy('name')">Player</th>
+      <th class="center" onclick="sortBy('score')">Score</th>
+      <th class="center" onclick="sortBy('thru')">Thru</th>
+      <th class="center" onclick="sortBy('today')">Today</th>
+      <th class="center" onclick="sortBy('model')">Model</th>
+      <th class="center" onclick="sortBy('dg')">DG</th>
+      <th class="center" onclick="sortBy('move')">Move</th>
+      <th class="center">Signal</th>
+    </tr></thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
+
+<script>
+const FIELD = [{"name": "Ludvig Aberg", "raw": "Aberg, Ludvig", "dg": 13, "model": 7, "tee": "8:40 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Zach Bauchou", "raw": "Bauchou, Zach", "dg": 161, "model": 999, "tee": "3:00 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Daniel Berger", "raw": "Berger, Daniel", "dg": 49, "model": 51, "tee": "7:52 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": true}, {"name": "Christiaan Bezuidenhout", "raw": "Bezuidenhout, Christiaan", "dg": 48, "model": 29, "tee": "8:04 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Akshay Bhatia", "raw": "Bhatia, Akshay", "dg": 17, "model": 18, "tee": "8:28 AM", "wave": "early", "hole": "10", "isValue": true, "isFade": false}, {"name": "Keegan Bradley", "raw": "Bradley, Keegan", "dg": 39, "model": 43, "tee": "1:48 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Michael Brennan", "raw": "Brennan, Michael", "dg": 108, "model": 72, "tee": "9:16 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Jacob Bridgeman", "raw": "Bridgeman, Jacob", "dg": 30, "model": 3, "tee": "1:36 PM", "wave": "late", "hole": "1", "isValue": true, "isFade": false}, {"name": "Sam Burns", "raw": "Burns, Sam", "dg": 27, "model": 36, "tee": "2:24 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Brian Campbell", "raw": "Campbell, Brian", "dg": 348, "model": 999, "tee": "2:36 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Patrick Cantlay", "raw": "Cantlay, Patrick", "dg": 25, "model": 19, "tee": "8:28 AM", "wave": "early", "hole": "1", "isValue": true, "isFade": false}, {"name": "Ricky Castillo", "raw": "Castillo, Ricky", "dg": 61, "model": 999, "tee": "8:28 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Bud Cauley", "raw": "Cauley, Bud", "dg": 107, "model": 64, "tee": "7:52 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Wyndham Clark", "raw": "Clark, Wyndham", "dg": 84, "model": 45, "tee": "2:00 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Eric Cole", "raw": "Cole, Eric", "dg": 124, "model": 999, "tee": "7:40 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Corey Conners", "raw": "Conners, Corey", "dg": 55, "model": 39, "tee": "2:36 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Pierceson Coody", "raw": "Coody, Pierceson", "dg": 38, "model": 16, "tee": "1:24 PM", "wave": "late", "hole": "10", "isValue": true, "isFade": false}, {"name": "Joel Dahmen", "raw": "Dahmen, Joel", "dg": 115, "model": 61, "tee": "1:24 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Cam Davis", "raw": "Davis, Cam", "dg": 999, "model": 999, "tee": "8:16 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Jason Day", "raw": "Day, Jason", "dg": 43, "model": 38, "tee": "2:36 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Zecheng Dou", "raw": "Dou, Zecheng", "dg": 116, "model": 999, "tee": "9:28 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Nico Echavarria", "raw": "Echavarria, Nico", "dg": 64, "model": 46, "tee": "2:36 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Harris English", "raw": "English, Harris", "dg": 19, "model": 23, "tee": "9:16 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "A.J. Ewart", "raw": "Ewart, A.J.", "dg": 236, "model": 999, "tee": "3:00 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Tony Finau", "raw": "Finau, Tony", "dg": 106, "model": 57, "tee": "8:28 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Steven Fisk", "raw": "Fisk, Steven", "dg": 152, "model": 999, "tee": "2:12 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Matt Fitzpatrick", "raw": "Fitzpatrick, Matt", "dg": 11, "model": 2, "tee": "9:04 AM", "wave": "early", "hole": "1", "isValue": true, "isFade": false}, {"name": "Tommy Fleetwood", "raw": "Fleetwood, Tommy", "dg": 5, "model": 12, "tee": "8:52 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "David Ford", "raw": "Ford, David", "dg": 172, "model": 999, "tee": "1:48 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Rickie Fowler", "raw": "Fowler, Rickie", "dg": 18, "model": 50, "tee": "2:00 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": true}, {"name": "Ryan Gerard", "raw": "Gerard, Ryan", "dg": 35, "model": 14, "tee": "8:28 AM", "wave": "early", "hole": "1", "isValue": true, "isFade": false}, {"name": "Lucas Glover", "raw": "Glover, Lucas", "dg": 82, "model": 999, "tee": "9:04 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Chris Gotterup", "raw": "Gotterup, Chris", "dg": 32, "model": 11, "tee": "2:24 PM", "wave": "late", "hole": "1", "isValue": true, "isFade": false}, {"name": "Max Greyserman", "raw": "Greyserman, Max", "dg": 54, "model": 60, "tee": "8:04 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Ben Griffin", "raw": "Griffin, Ben", "dg": 16, "model": 13, "tee": "1:36 PM", "wave": "late", "hole": "1", "isValue": true, "isFade": false}, {"name": "Emiliano Grillo", "raw": "Grillo, Emiliano", "dg": 127, "model": 999, "tee": "8:04 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Harry Hall", "raw": "Hall, Harry", "dg": 26, "model": 999, "tee": "1:36 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Brian Harman", "raw": "Harman, Brian", "dg": 134, "model": 54, "tee": "8:52 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Russell Henley", "raw": "Henley, Russell", "dg": 4, "model": 28, "tee": "9:04 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Garrick Higgo", "raw": "Higgo, Garrick", "dg": 114, "model": 999, "tee": "8:40 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Joe Highsmith", "raw": "Highsmith, Joe", "dg": 488, "model": 999, "tee": "2:12 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Ryo Hisatsune", "raw": "Hisatsune, Ryo", "dg": 87, "model": 17, "tee": "1:24 PM", "wave": "late", "hole": "1", "isValue": true, "isFade": false}, {"name": "Lee Hodges", "raw": "Hodges, Lee", "dg": 135, "model": 999, "tee": "1:00 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Rico Hoey", "raw": "Hoey, Rico", "dg": 137, "model": 999, "tee": "7:40 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Tom Hoge", "raw": "Hoge, Tom", "dg": 162, "model": 999, "tee": "1:00 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Nicolai Hojgaard", "raw": "Hojgaard, Nicolai", "dg": 33, "model": 33, "tee": "1:00 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Rasmus Hojgaard", "raw": "Hojgaard, Rasmus", "dg": 42, "model": 48, "tee": "8:04 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Max Homa", "raw": "Homa, Max", "dg": 90, "model": 56, "tee": "7:52 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Viktor Hovland", "raw": "Hovland, Viktor", "dg": 23, "model": 21, "tee": "9:04 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Mark Hubbard", "raw": "Hubbard, Mark", "dg": 178, "model": 999, "tee": "7:40 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Mackenzie Hughes", "raw": "Hughes, Mackenzie", "dg": 103, "model": 75, "tee": "7:40 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Sungjae Im", "raw": "Im, Sungjae", "dg": 138, "model": 55, "tee": "9:16 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Stephan Jaeger", "raw": "Jaeger, Stephan", "dg": 120, "model": 999, "tee": "1:36 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Takumi Kanaya", "raw": "Kanaya, Takumi", "dg": 122, "model": 999, "tee": "2:48 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Johnny Keefer", "raw": "Keefer, Johnny", "dg": 91, "model": 999, "tee": "9:28 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Michael Kim", "raw": "Kim, Michael", "dg": 88, "model": 999, "tee": "1:12 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "S.H. Kim", "raw": "Kim, S.H.", "dg": 164, "model": 999, "tee": "2:48 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Si Woo Kim", "raw": "Kim, Si Woo", "dg": 8, "model": 9, "tee": "8:40 AM", "wave": "early", "hole": "10", "isValue": true, "isFade": false}, {"name": "Chris Kirk", "raw": "Kirk, Chris", "dg": 104, "model": 999, "tee": "1:48 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Kurt Kitayama", "raw": "Kitayama, Kurt", "dg": 28, "model": 22, "tee": "1:36 PM", "wave": "late", "hole": "10", "isValue": true, "isFade": false}, {"name": "Patton Kizzire", "raw": "Kizzire, Patton", "dg": 193, "model": 999, "tee": "9:28 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Jake Knapp", "raw": "Knapp, Jake", "dg": 15, "model": 10, "tee": "9:16 AM", "wave": "early", "hole": "10", "isValue": true, "isFade": false}, {"name": "Brooks Koepka", "raw": "Koepka, Brooks", "dg": 136, "model": 52, "tee": "8:28 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": true}, {"name": "Min Woo Lee", "raw": "Lee, Min Woo", "dg": 22, "model": 25, "tee": "2:24 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Haotong Li", "raw": "Li, Haotong", "dg": 77, "model": 66, "tee": "9:28 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Shane Lowry", "raw": "Lowry, Shane", "dg": 20, "model": 5, "tee": "1:48 PM", "wave": "late", "hole": "1", "isValue": true, "isFade": false}, {"name": "Robert MacIntyre", "raw": "MacIntyre, Robert", "dg": 12, "model": 49, "tee": "9:04 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": true}, {"name": "Hideki Matsuyama", "raw": "Matsuyama, Hideki", "dg": 10, "model": 6, "tee": "2:12 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Denny McCarthy", "raw": "McCarthy, Denny", "dg": 75, "model": 65, "tee": "1:00 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Matt McCarty", "raw": "McCarty, Matt", "dg": 50, "model": 63, "tee": "8:40 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Max McGreevy", "raw": "McGreevy, Max", "dg": 66, "model": 62, "tee": "2:48 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Rory McIlroy", "raw": "McIlroy, Rory", "dg": 3, "model": 8, "tee": "2:12 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Maverick McNealy", "raw": "McNealy, Maverick", "dg": 21, "model": 24, "tee": "8:52 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Mac Meissner", "raw": "Meissner, Mac", "dg": 73, "model": 74, "tee": "7:40 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Keith Mitchell", "raw": "Mitchell, Keith", "dg": 57, "model": 41, "tee": "1:12 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Taylor Moore", "raw": "Moore, Taylor", "dg": 131, "model": 71, "tee": "1:24 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Collin Morikawa", "raw": "Morikawa, Collin", "dg": 9, "model": 4, "tee": "8:40 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "William Mouw", "raw": "Mouw, William", "dg": 158, "model": 999, "tee": "2:12 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Alex Noren", "raw": "Noren, Alex", "dg": 24, "model": 30, "tee": "8:16 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Andrew Novak", "raw": "Novak, Andrew", "dg": 98, "model": 999, "tee": "2:00 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Thorbjorn Olesen", "raw": "Olesen, Thorbjorn", "dg": 62, "model": 59, "tee": "7:40 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Matthieu Pavon", "raw": "Pavon, Matthieu", "dg": 219, "model": 999, "tee": "2:48 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Taylor Pendrith", "raw": "Pendrith, Taylor", "dg": 44, "model": 44, "tee": "8:16 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Marco Penge", "raw": "Penge, Marco", "dg": 92, "model": 70, "tee": "1:12 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Chandler Phillips", "raw": "Phillips, Chandler", "dg": 187, "model": 999, "tee": "7:52 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "J.T. Poston", "raw": "Poston, J.T.", "dg": 76, "model": 999, "tee": "9:16 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Aldrich Potgieter", "raw": "Potgieter, Aldrich", "dg": 226, "model": 999, "tee": "9:16 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Seamus Power", "raw": "Power, Seamus", "dg": 95, "model": 76, "tee": "9:28 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Andrew Putnam", "raw": "Putnam, Andrew", "dg": 153, "model": 999, "tee": "1:00 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Aaron Rai", "raw": "Rai, Aaron", "dg": 63, "model": 37, "tee": "2:36 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Chad Ramey", "raw": "Ramey, Chad", "dg": 144, "model": 999, "tee": "1:24 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Kristoffer Reitan", "raw": "Reitan, Kristoffer", "dg": 67, "model": 68, "tee": "8:04 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Davis Riley", "raw": "Riley, Davis", "dg": 273, "model": 999, "tee": "8:52 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Patrick Rodgers", "raw": "Rodgers, Patrick", "dg": 68, "model": 999, "tee": "1:12 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Justin Rose", "raw": "Rose, Justin", "dg": 41, "model": 35, "tee": "2:24 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Kevin Roy", "raw": "Roy, Kevin", "dg": 102, "model": 999, "tee": "1:12 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Xander Schauffele", "raw": "Schauffele, Xander", "dg": 6, "model": 26, "tee": "2:12 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": true}, {"name": "Scottie Scheffler", "raw": "Scheffler, Scottie", "dg": 1, "model": 1, "tee": "8:52 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Adam Schenk", "raw": "Schenk, Adam", "dg": 388, "model": 999, "tee": "8:40 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Matti Schmid", "raw": "Schmid, Matti", "dg": 140, "model": 999, "tee": "2:48 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Adam Scott", "raw": "Scott, Adam", "dg": 29, "model": 15, "tee": "1:36 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Alex Smalley", "raw": "Smalley, Alex", "dg": 89, "model": 69, "tee": "1:24 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Jordan Smith", "raw": "Smith, Jordan", "dg": 70, "model": 73, "tee": "9:28 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Austin Smotherman", "raw": "Smotherman, Austin", "dg": 133, "model": 999, "tee": "2:48 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "J.J. Spaun", "raw": "Spaun, J.J.", "dg": 31, "model": 999, "tee": "1:48 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Jordan Spieth", "raw": "Spieth, Jordan", "dg": 36, "model": 53, "tee": "2:00 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": true}, {"name": "Sam Stevens", "raw": "Stevens, Sam", "dg": 59, "model": 999, "tee": "1:00 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Sepp Straka", "raw": "Straka, Sepp", "dg": 34, "model": 20, "tee": "1:48 PM", "wave": "late", "hole": "1", "isValue": true, "isFade": false}, {"name": "Nick Taylor", "raw": "Taylor, Nick", "dg": 37, "model": 47, "tee": "2:00 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Sahith Theegala", "raw": "Theegala, Sahith", "dg": 46, "model": 34, "tee": "2:00 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Justin Thomas", "raw": "Thomas, Justin", "dg": 51, "model": 40, "tee": "8:52 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Davis Thompson", "raw": "Thompson, Davis", "dg": 80, "model": 32, "tee": "2:24 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Michael Thorbjornsen", "raw": "Thorbjornsen, Michael", "dg": 74, "model": 42, "tee": "7:52 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Sami Valimaki", "raw": "Valimaki, Sami", "dg": 94, "model": 999, "tee": "9:04 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Erik Van Rooyen", "raw": "Van Rooyen, Erik", "dg": 320, "model": 999, "tee": "1:12 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Jhonattan Vegas", "raw": "Vegas, Jhonattan", "dg": 222, "model": 999, "tee": "8:16 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Karl Vilips", "raw": "Vilips, Karl", "dg": 241, "model": 999, "tee": "2:36 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Danny Walker", "raw": "Walker, Danny", "dg": 327, "model": 999, "tee": "8:04 AM", "wave": "early", "hole": "10", "isValue": false, "isFade": false}, {"name": "Vince Whaley", "raw": "Whaley, Vince", "dg": 109, "model": 999, "tee": "7:52 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Gary Woodland", "raw": "Woodland, Gary", "dg": 159, "model": 999, "tee": "8:16 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}, {"name": "Sudarshan Yellamaraju", "raw": "Yellamaraju, Sudarshan", "dg": 198, "model": 999, "tee": "3:00 PM", "wave": "late", "hole": "1", "isValue": false, "isFade": false}, {"name": "Cameron Young", "raw": "Young, Cameron", "dg": 7, "model": 27, "tee": "2:24 PM", "wave": "late", "hole": "10", "isValue": false, "isFade": false}, {"name": "Kevin Yu", "raw": "Yu, Kevin", "dg": 126, "model": 999, "tee": "8:16 AM", "wave": "early", "hole": "1", "isValue": false, "isFade": false}];
+
+// Build lookup: ESPN display name -> field player
+// ESPN uses "Firstname Lastname" — matches our .name field
+const byName = {};
+FIELD.forEach(p => { byName[p.name.toLowerCase()] = p; });
+
+// Also index by last name for fuzzy matching
+const byLast = {};
+FIELD.forEach(p => {
+  const last = p.name.split(' ').slice(-1)[0].toLowerCase();
+  if(!byLast[last]) byLast[last] = [];
+  byLast[last].push(p);
+});
+
+let liveScores = {}; // name -> {score, thru, today, status, r1pos}
+let currentFilter = 'all';
+let currentSort = 'r1pos';
+let sortAsc = false;
+let searchTerm = '';
+let countdownSecs = 60;
+let countdownTimer = null;
+let fetchTimer = null;
+
+// ── ESPN FETCH ─────────────────────────────────────────────────────────────
+async function fetchScores() {
+  setBadge('fetching', 'Fetching...');
+  document.getElementById('error-banner').classList.remove('show');
+  resetCountdown();
+
+  // Call our Netlify serverless function — no CORS issues
+  const endpoint = '/.netlify/functions/scores';
+
+  try {
+    const res  = await fetch(endpoint, { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    parseESPN(data);
+    setBadge('live', 'Live');
+    document.getElementById('last-updated').textContent = 'Updated ' + new Date().toLocaleTimeString();
+  } catch(e) {
+    console.warn('Scores fetch failed:', e);
+    // Fallback: try allorigins as backup
+    try {
+      const espnUrl = 'https://site.api.espn.com/apis/site/v2/sports/golf/pga/scoreboard';
+      const proxy   = 'https://api.allorigins.win/get?url=' + encodeURIComponent(espnUrl);
+      const res2    = await fetch(proxy, { cache: 'no-store' });
+      const wrap    = await res2.json();
+      const data2   = JSON.parse(wrap.contents);
+      parseESPN(data2);
+      setBadge('live', 'Live (fallback)');
+      document.getElementById('last-updated').textContent = 'Updated ' + new Date().toLocaleTimeString();
+    } catch(e2) {
+      setBadge('error', 'Offline');
+      document.getElementById('error-banner').classList.add('show');
+    }
+  }
+  renderTable();
+}
+
+function parseESPN(data) {
+  liveScores = {};
+  const events = data.events || [];
+  // Find The Players (event name match)
+  let event = events.find(e => /players/i.test(e.name)) || events[0];
+  if(!event) return;
+
+  const comps = event.competitions || [];
+  const comp  = comps[0];
+  if(!comp) return;
+
+  const competitors = comp.competitors || [];
+  // Assign live leaderboard positions
+  competitors.forEach((c, idx) => {
+    const espnName = c.athlete ? (c.athlete.displayName || '') : '';
+    const p = matchPlayer(espnName);
+    if(!p) return;
+
+    const stats   = c.statistics || [];
+    const score   = c.score || '0';      // total score to par as string e.g. "-4"
+    const thruRaw = c.status ? c.status.thru : null;
+    const today   = stats.find(s => s.name === 'roundScore')?.displayValue || '';
+    const status  = c.status ? c.status.type?.description : 'scheduled';
+
+    // Score parsing
+    let scorePar = 0;
+    if(score === 'E') scorePar = 0;
+    else { const n = parseInt(score); if(!isNaN(n)) scorePar = n; }
+
+    liveScores[p.raw] = {
+      score: scorePar,
+      thru: thruRaw,
+      today: today,
+      status: status || 'scheduled',
+      espnPos: parseInt(c.order || idx+1),
+    };
+  });
+
+  // Now assign r1pos based on score sort
+  const ranked = FIELD
+    .filter(p => liveScores[p.raw])
+    .sort((a,b) => liveScores[a.raw].score - liveScores[b.raw].score);
+
+  let pos = 1;
+  for(let i = 0; i < ranked.length; i++) {
+    if(i > 0 && liveScores[ranked[i].raw].score === liveScores[ranked[i-1].raw].score) {
+      liveScores[ranked[i].raw].r1pos = liveScores[ranked[i-1].raw].r1pos;
+    } else {
+      liveScores[ranked[i].raw].r1pos = pos;
+    }
+    pos++;
+  }
+}
+
+function matchPlayer(espnName) {
+  if(!espnName) return null;
+  const key = espnName.toLowerCase();
+  if(byName[key]) return byName[key];
+  // Try last name match
+  const last = key.split(' ').slice(-1)[0];
+  const candidates = byLast[last];
+  if(candidates && candidates.length === 1) return candidates[0];
+  if(candidates && candidates.length > 1) {
+    // Try first name initial
+    const first = key[0];
+    return candidates.find(p => p.name[0].toLowerCase() === first) || candidates[0];
+  }
+  return null;
+}
+
+// ── RENDER ─────────────────────────────────────────────────────────────────
+function getRankedData() {
+  const withScore = FIELD.filter(p => liveScores[p.raw]);
+  const noScore   = FIELD.filter(p => !liveScores[p.raw]);
+
+  withScore.sort((a,b) => liveScores[a.raw].score - liveScores[b.raw].score);
+  let pos = 1;
+  withScore.forEach((p,i) => {
+    if(i > 0 && liveScores[p.raw].score === liveScores[withScore[i-1].raw].score) {
+      liveScores[p.raw].r1pos = liveScores[withScore[i-1].raw].r1pos;
+    } else {
+      liveScores[p.raw].r1pos = pos;
+    }
+    pos++;
+  });
+  noScore.forEach((p,i) => { if(!liveScores[p.raw]) {} });
+
+  return [...withScore, ...noScore];
+}
+
+function renderTable() {
+  let data = getRankedData();
+
+  // Filter
+  if(currentFilter === 'value')   data = data.filter(p => p.isValue);
+  if(currentFilter === 'fade')    data = data.filter(p => p.isFade);
+  if(currentFilter === 'early')   data = data.filter(p => p.wave === 'early');
+  if(currentFilter === 'late')    data = data.filter(p => p.wave === 'late');
+  if(currentFilter === 'playing') data = data.filter(p => {
+    const s = liveScores[p.raw];
+    return s && s.status && /progress|active|in/i.test(s.status);
+  });
+
+  if(searchTerm) data = data.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
+
+  // Sort
+  data.sort((a,b) => {
+    const sa = liveScores[a.raw], sb = liveScores[b.raw];
+    let va, vb;
+    if(currentSort === 'r1pos') {
+      va = sa ? sa.r1pos : 9999; vb = sb ? sb.r1pos : 9999;
+    } else if(currentSort === 'name') {
+      return sortAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+    } else if(currentSort === 'score') {
+      va = sa ? sa.score : 999; vb = sb ? sb.score : 999;
+    } else if(currentSort === 'thru') {
+      va = sa ? (sa.thru||0) : -1; vb = sb ? (sb.thru||0) : -1;
+    } else if(currentSort === 'today') {
+      va = sa ? (parseInt(sa.today)||0) : 999; vb = sb ? (parseInt(sb.today)||0) : 999;
+    } else if(currentSort === 'model') {
+      va = a.model; vb = b.model;
+    } else if(currentSort === 'dg') {
+      va = a.dg; vb = b.dg;
+    } else if(currentSort === 'move') {
+      va = sa ? (a.dg - sa.r1pos) : -999; vb = sb ? (b.dg - sb.r1pos) : -999;
+    }
+    if(va === vb) return 0;
+    return sortAsc ? va - vb : vb - va;
+  });
+
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = '';
+
+  data.forEach(p => {
+    const ls = liveScores[p.raw];
+    const hasScore = !!ls;
+
+    const tr = document.createElement('tr');
+    if(p.isValue && hasScore) tr.className = 'row-value';
+    else if(p.isFade && hasScore) tr.className = 'row-fade';
+
+    // Position
+    const posStr = hasScore ? posDisp(ls.r1pos) : '—';
+    const posCls = hasScore ? (ls.r1pos===1?'p1':ls.r1pos<=3?'p2':ls.r1pos<=10?'p3':'') : '';
+
+    // Score
+    const scoreHtml = hasScore ? fmtScore(ls.score) : '<span class="score-ns">NS</span>';
+
+    // Thru
+    const thruHtml = hasScore ? fmtThru(ls.thru, ls.status) : '<span class="thru">—</span>';
+
+    // Today
+    const todayHtml = hasScore && ls.today ? fmtScore(parseInt(ls.today)||0, true) : '<span class="score-ns">—</span>';
+
+    // Movement vs DG rank
+    const moveHtml = hasScore ? fmtMove(p.dg - ls.r1pos) : '<span class="move move-flat">—</span>';
+
+    // Signal
+    const sigHtml = p.isValue
+      ? '<span class="sig-chip sig-value">★ Value</span>'
+      : p.isFade
+        ? '<span class="sig-chip sig-fade">✕ Fade</span>'
+        : '<span class="sig-chip sig-watch">Watch</span>';
+
+    tr.innerHTML = `
+      <td class="center"><span class="pos ${posCls}">${posStr}</span></td>
+      <td>
+        <div class="player-cell">
+          <div class="player-name">${p.name}</div>
+          <div class="player-meta">Hole ${p.hole} &nbsp;·&nbsp; <span class="${p.wave==='early'?'wave-early':'wave-late'}">${p.tee}</span></div>
+        </div>
+      </td>
+      <td class="center">${scoreHtml}</td>
+      <td class="center">${thruHtml}</td>
+      <td class="center">${todayHtml}</td>
+      <td class="center"><span class="rank-badge rb-model">${p.model<999?p.model:'—'}</span></td>
+      <td class="center"><span class="rank-badge rb-dg">${p.dg<999?p.dg:'—'}</span></td>
+      <td class="center">${moveHtml}</td>
+      <td class="center">${sigHtml}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  updateSummary(getRankedData());
+}
+
+// ── FORMATTERS ─────────────────────────────────────────────────────────────
+function fmtScore(n, compact) {
+  if(isNaN(n)) return '<span class="score-ns">—</span>';
+  const cls = n < 0 ? 'score-under' : n > 0 ? 'score-over' : 'score-even';
+  const str = n < 0 ? String(n) : n > 0 ? '+'+n : 'E';
+  return `<span class="score-val ${cls}">${str}</span>`;
+}
+
+function fmtThru(thru, status) {
+  if(thru === null || thru === undefined) {
+    if(/scheduled|tee/i.test(status||'')) return '<span class="thru">Tee</span>';
+    return '<span class="thru">—</span>';
+  }
+  if(thru === 18 || /complete|final/i.test(status||''))
+    return '<span class="thru done">F</span>';
+  return `<span class="thru active">${thru}</span>`;
+}
+
+function posDisp(pos) {
+  return pos <= 10 ? 'T'+pos : String(pos);
+}
+
+function fmtMove(diff) {
+  if(!diff && diff !== 0) return '<span class="move move-flat">—</span>';
+  if(diff > 0) return `<span class="move move-up">▲ ${diff}</span>`;
+  if(diff < 0) return `<span class="move move-dn">▼ ${Math.abs(diff)}</span>`;
+  return '<span class="move move-flat">— 0</span>';
+}
+
+// ── SUMMARY ────────────────────────────────────────────────────────────────
+function updateSummary(data) {
+  const played = data.filter(p => liveScores[p.raw]);
+  document.getElementById('sb-done').textContent = `${played.length} / ${FIELD.length}`;
+  if(!played.length) return;
+
+  const leader = played.reduce((a,b) => liveScores[a.raw].score <= liveScores[b.raw].score ? a : b);
+  const leaderScore = liveScores[leader.raw].score;
+  const scoreStr = leaderScore < 0 ? leaderScore : leaderScore > 0 ? '+'+leaderScore : 'E';
+  document.getElementById('sb-leader').textContent = leader.name.split(' ').pop() + ' ' + scoreStr;
+
+  const valuePlayed = played.filter(p => p.isValue);
+  if(valuePlayed.length) {
+    const best = valuePlayed.reduce((a,b) => liveScores[a.raw].score <= liveScores[b.raw].score ? a : b);
+    const bs = liveScores[best.raw].score;
+    document.getElementById('sb-value').textContent = best.name.split(' ').pop() + ' ' + (bs<0?bs:bs>0?'+'+bs:'E');
+  }
+
+  const movers = played.map(p => ({p, diff: p.dg - liveScores[p.raw].r1pos}));
+  const bigUp = movers.reduce((a,b) => b.diff > a.diff ? b : a);
+  const bigDn = movers.reduce((a,b) => b.diff < a.diff ? b : a);
+  if(bigUp.diff > 0) document.getElementById('sb-up').textContent = bigUp.p.name.split(' ').pop() + ' +' + bigUp.diff;
+  if(bigDn.diff < 0) document.getElementById('sb-dn').textContent = bigDn.p.name.split(' ').pop() + ' ' + bigDn.diff;
+}
+
+// ── UI HELPERS ─────────────────────────────────────────────────────────────
+function setBadge(type, text) {
+  const b = document.getElementById('live-badge');
+  b.className = 'live-badge' + (type !== 'live' ? ' ' + type : '');
+  document.getElementById('live-text').textContent = text;
+}
+
+function setFilter(f, el) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  renderTable();
+}
+
+function setSearch(v) { searchTerm = v; renderTable(); }
+
+function sortBy(col) {
+  if(currentSort === col) sortAsc = !sortAsc; else { currentSort = col; sortAsc = false; }
+  renderTable();
+}
+
+function resetCountdown() {
+  countdownSecs = 60;
+  if(countdownTimer) clearInterval(countdownTimer);
+  countdownTimer = setInterval(() => {
+    countdownSecs--;
+    document.getElementById('countdown').textContent = `Next refresh in ${countdownSecs}s`;
+    if(countdownSecs <= 0) {
+      clearInterval(countdownTimer);
+      fetchScores();
+    }
+  }, 1000);
+}
+
+// ── INIT ───────────────────────────────────────────────────────────────────
+renderTable(); // render field immediately with no scores
+fetchScores(); // then fetch live data
+</script>
+</body>
+</html>
