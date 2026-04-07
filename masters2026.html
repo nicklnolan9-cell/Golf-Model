@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -27,145 +28,143 @@
   --white: #ffffff;
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
+- { margin:0; padding:0; box-sizing:border-box; }
 
 html {
-  background: #0f1117;
-  background-color: #0f1117;
+background: #0f1117;
+background-color: #0f1117;
 }
 
-
 body {
-  background: #0f1117;
-  background-color: #0f1117;
-  color: #dde6f0;
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  min-height: 100vh;
-  overflow-x: hidden;
+background: #0f1117;
+background-color: #0f1117;
+color: #dde6f0;
+font-family: ‘Cormorant Garamond’, Georgia, serif;
+min-height: 100vh;
+overflow-x: hidden;
 }
 
 /* ── ANIMATED BACKGROUND ── */
 body::before {
-  content:'';
-  position:fixed; inset:0; z-index:0;
-  background-color: #0f1117;
-  background-image:
-    radial-gradient(ellipse 120% 60% at 20% 80%, rgba(44,68,120,0.2) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 80% at 80% 20%, rgba(76,170,204,0.07) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 40% at 50% 50%, rgba(201,168,76,0.04) 0%, transparent 60%);
-  pointer-events:none;
+content:’’;
+position:fixed; inset:0; z-index:0;
+background-color: #0f1117;
+background-image:
+radial-gradient(ellipse 120% 60% at 20% 80%, rgba(44,68,120,0.2) 0%, transparent 60%),
+radial-gradient(ellipse 80% 80% at 80% 20%, rgba(76,170,204,0.07) 0%, transparent 50%),
+radial-gradient(ellipse 60% 40% at 50% 50%, rgba(201,168,76,0.04) 0%, transparent 60%);
+pointer-events:none;
 }
 
 /* Magnolia lane trees - decorative SVG pattern */
 /* dot pattern replaced with pure CSS - SVG data URIs can cause white bg on iOS */
-
 
 /* ── LAYOUT ── */
 .container { position:relative; z-index:1; max-width:980px; margin:0 auto; padding:0 16px 60px; background:transparent; }
 
 /* ── HEADER ── */
 header {
-  text-align:center;
-  padding: 48px 0 36px;
-  position:relative;
-  background: #0f1117;
+text-align:center;
+padding: 48px 0 36px;
+position:relative;
+background: #0f1117;
 }
 
 .magnolia-deco {
-  display:flex; justify-content:center; align-items:center; gap:16px;
-  margin-bottom:12px;
+display:flex; justify-content:center; align-items:center; gap:16px;
+margin-bottom:12px;
 }
 .magnolia-deco .line { flex:1; max-width:80px; height:1px; background:linear-gradient(90deg,transparent,#c9a84c); }
 .magnolia-deco .line.right { background:linear-gradient(90deg,#c9a84c,transparent); }
 
 .magnolia-icon {
-  width:52px; height:52px;
+width:52px; height:52px;
 }
 
 header h1 {
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2.2rem,6vw,3.8rem);
-  font-weight:900;
-  font-style:italic;
-  color:#e8c96a;
-  letter-spacing:-0.02em;
-  line-height:1;
-  text-shadow: 0 2px 20px rgba(201,168,76,0.3);
+font-family:‘Playfair Display’,serif;
+font-size:clamp(2.2rem,6vw,3.8rem);
+font-weight:900;
+font-style:italic;
+color:#e8c96a;
+letter-spacing:-0.02em;
+line-height:1;
+text-shadow: 0 2px 20px rgba(201,168,76,0.3);
 }
 
 header h1 span {
-  color:#ffffff;
-  font-style:normal;
+color:#ffffff;
+font-style:normal;
 }
 
 .header-sub {
-  font-family:'DM Mono',monospace;
-  font-size:11px;
-  letter-spacing:0.25em;
-  color:#7a90b0;
-  text-transform:uppercase;
-  margin-top:10px;
+font-family:‘DM Mono’,monospace;
+font-size:11px;
+letter-spacing:0.25em;
+color:#7a90b0;
+text-transform:uppercase;
+margin-top:10px;
 }
 
 .header-meta {
-  display:flex; justify-content:center; gap:24px; margin-top:16px; flex-wrap:wrap;
+display:flex; justify-content:center; gap:24px; margin-top:16px; flex-wrap:wrap;
 }
 .meta-pill {
-  font-family:'DM Mono',monospace;
-  font-size:10px;
-  letter-spacing:0.15em;
-  color:#c9a84c;
-  border:1px solid rgba(201,168,76,0.5);
-  border-radius:2px;
-  padding:4px 12px;
-  background:rgba(201,168,76,0.07);
-  background:rgba(201,168,76,0.07);
+font-family:‘DM Mono’,monospace;
+font-size:10px;
+letter-spacing:0.15em;
+color:#c9a84c;
+border:1px solid rgba(201,168,76,0.5);
+border-radius:2px;
+padding:4px 12px;
+background:rgba(201,168,76,0.07);
+background:rgba(201,168,76,0.07);
 }
 
 /* ── COURSE FIT LEGEND ── */
 .legend {
-  display:flex; justify-content:center; gap:20px; flex-wrap:wrap;
-  margin:0 0 24px;
-  font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em;
+display:flex; justify-content:center; gap:20px; flex-wrap:wrap;
+margin:0 0 24px;
+font-family:‘DM Mono’,monospace; font-size:10px; letter-spacing:0.1em;
 }
 .legend-item { display:flex; align-items:center; gap:6px; color:#8a9eb8; }
 .legend-dot { width:8px; height:8px; border-radius:50%; }
 
 /* ── FEATURED HOLE HERO ── */
 .featured-hole {
-  border-radius:4px; overflow:hidden; border:1px solid #2a3248;
-  margin-bottom:28px; position:relative;
-  background:linear-gradient(135deg,#080c14 0%,#0d1220 55%,#080c14 100%);
+border-radius:4px; overflow:hidden; border:1px solid #2a3248;
+margin-bottom:28px; position:relative;
+background:linear-gradient(135deg,#080c14 0%,#0d1220 55%,#080c14 100%);
 }
 .fh-azalea-stripe {
-  position:absolute; top:0; left:0; right:0; height:3px;
-  background:linear-gradient(90deg,#8b1a3a,#c0397a,#e85d9a,#c0397a,#8b1a3a);
-  opacity:0.9;
+position:absolute; top:0; left:0; right:0; height:3px;
+background:linear-gradient(90deg,#8b1a3a,#c0397a,#e85d9a,#c0397a,#8b1a3a);
+opacity:0.9;
 }
 .fh-layout { display:flex; align-items:stretch; min-height:260px; position:relative; z-index:2; }
 .fh-left {
-  flex:1; padding:32px 36px 28px;
-  display:flex; flex-direction:column; justify-content:space-between;
-  border-right:1px solid rgba(201,168,76,0.1);
+flex:1; padding:32px 36px 28px;
+display:flex; flex-direction:column; justify-content:space-between;
+border-right:1px solid rgba(201,168,76,0.1);
 }
-.fh-eyebrow { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.22em; color:#c9a84c; text-transform:uppercase; margin-bottom:12px; }
-.fh-title { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900; font-style:italic; color:#ffffff; line-height:1; margin-bottom:6px; }
-.fh-subtitle { font-family:'Cormorant Garamond',serif; font-size:16px; font-style:italic; color:#8a9eb8; margin-bottom:20px; }
+.fh-eyebrow { font-family:‘DM Mono’,monospace; font-size:9px; letter-spacing:0.22em; color:#c9a84c; text-transform:uppercase; margin-bottom:12px; }
+.fh-title { font-family:‘Playfair Display’,serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900; font-style:italic; color:#ffffff; line-height:1; margin-bottom:6px; }
+.fh-subtitle { font-family:‘Cormorant Garamond’,serif; font-size:16px; font-style:italic; color:#8a9eb8; margin-bottom:20px; }
 .fh-stats { display:flex; flex-wrap:wrap; gap:20px; }
-.fh-stat-label { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:0.18em; color:#7a90b0; text-transform:uppercase; margin-bottom:2px; }
-.fh-stat-val { font-family:'DM Mono',monospace; font-size:18px; font-weight:500; color:#e8c96a; }
+.fh-stat-label { font-family:‘DM Mono’,monospace; font-size:8px; letter-spacing:0.18em; color:#7a90b0; text-transform:uppercase; margin-bottom:2px; }
+.fh-stat-val { font-family:‘DM Mono’,monospace; font-size:18px; font-weight:500; color:#e8c96a; }
 .fh-stat-sub { font-size:11px; color:#8a9eb8; font-style:italic; }
-.fh-quote { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; color:#8a9eb8; line-height:1.5; padding-top:16px; border-top:1px solid #2a3248; max-width:380px; }
+.fh-quote { font-family:‘Cormorant Garamond’,serif; font-style:italic; font-size:13px; color:#8a9eb8; line-height:1.5; padding-top:16px; border-top:1px solid #2a3248; max-width:380px; }
 .fh-right {
-  width:340px; flex-shrink:0; display:flex; flex-direction:column;
-  align-items:center; justify-content:center; padding:24px 28px; position:relative;
-  background:radial-gradient(ellipse at center,rgba(22,27,38,0.7) 0%,transparent 70%);
+width:340px; flex-shrink:0; display:flex; flex-direction:column;
+align-items:center; justify-content:center; padding:24px 28px; position:relative;
+background:radial-gradient(ellipse at center,rgba(22,27,38,0.7) 0%,transparent 70%);
 }
-.fh-hole-label { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:#7a90b0; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
-.fh-hole-label::before, .fh-hole-label::after { content:''; flex:1; height:1px; background:#2a3248; }
+.fh-hole-label { font-family:‘DM Mono’,monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:#7a90b0; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+.fh-hole-label::before, .fh-hole-label::after { content:’’; flex:1; height:1px; background:#2a3248; }
 .fh-svg-wrap {
-  filter:drop-shadow(0 8px 28px rgba(139,26,58,0.2)) drop-shadow(0 0 12px rgba(201,168,76,0.1));
-  animation:holeFloat 7s ease-in-out infinite;
+filter:drop-shadow(0 8px 28px rgba(139,26,58,0.2)) drop-shadow(0 0 12px rgba(201,168,76,0.1));
+animation:holeFloat 7s ease-in-out infinite;
 }
 @keyframes holeFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
 @keyframes ripple { 0%{opacity:0.35} 50%{opacity:0.1} 100%{opacity:0} }
@@ -177,75 +176,75 @@ header h1 span {
 .azalea-bloom2 { animation:azaleaPulse 4s ease-in-out 1.4s infinite; }
 .azalea-bloom3 { animation:azaleaPulse 4s ease-in-out 2.8s infinite; }
 .fh-chips { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; justify-content:center; }
-.fh-chip { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.12em; padding:4px 10px; border-radius:2px; border:1px solid #2a3248; color:#8a9eb8; background:rgba(255,255,255,0.03); }
+.fh-chip { font-family:‘DM Mono’,monospace; font-size:9px; letter-spacing:0.12em; padding:4px 10px; border-radius:2px; border:1px solid #2a3248; color:#8a9eb8; background:rgba(255,255,255,0.03); }
 .fh-chip.pink { border-color:rgba(200,57,120,0.4); color:#e07ab0; background:rgba(200,57,120,0.08); }
 @media(max-width:680px) {
-  .fh-layout { flex-direction:column; min-height:auto; }
-  .fh-left { padding:20px 18px 16px; border-right:none; border-bottom:1px solid rgba(201,168,76,0.12); }
-  .fh-right { width:100%; padding:18px 18px 22px; }
-  .fh-svg-wrap svg { width:200px; height:150px; }
+.fh-layout { flex-direction:column; min-height:auto; }
+.fh-left { padding:20px 18px 16px; border-right:none; border-bottom:1px solid rgba(201,168,76,0.12); }
+.fh-right { width:100%; padding:18px 18px 22px; }
+.fh-svg-wrap svg { width:200px; height:150px; }
 }
 
 /* ── WEIGHT BREAKDOWN CARD ── */
 .weights-card {
-  background:#1c2233;
-  border:1px solid #2a3248;
-  border-radius:4px;
-  padding:20px 24px;
-  margin-bottom:28px;
-  backdrop-filter:blur(10px);
+background:#1c2233;
+border:1px solid #2a3248;
+border-radius:4px;
+padding:20px 24px;
+margin-bottom:28px;
+backdrop-filter:blur(10px);
 }
 .weights-title {
-  font-family:'Playfair Display',serif;
-  font-size:13px;
-  font-style:italic;
-  color:#c9a84c;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  margin-bottom:14px;
-  text-align:center;
+font-family:‘Playfair Display’,serif;
+font-size:13px;
+font-style:italic;
+color:#c9a84c;
+letter-spacing:0.1em;
+text-transform:uppercase;
+margin-bottom:14px;
+text-align:center;
 }
 .weights-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:12px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+gap:12px;
 }
 .weight-item {
-  text-align:center;
+text-align:center;
 }
 .weight-label {
-  font-family:'DM Mono',monospace;
-  font-size:9px;
-  letter-spacing:0.15em;
-  color:#8a9eb8;
-  text-transform:uppercase;
-  margin-bottom:4px;
+font-family:‘DM Mono’,monospace;
+font-size:9px;
+letter-spacing:0.15em;
+color:#8a9eb8;
+text-transform:uppercase;
+margin-bottom:4px;
 }
 .weight-bar-wrap { height:3px; background:rgba(255,255,255,0.08); border-radius:2px; margin-bottom:4px; }
 .weight-bar { height:3px; background:linear-gradient(90deg,#3ddc84,#c9a84c); border-radius:2px; }
 .weight-pct {
-  font-family:'DM Mono',monospace;
-  font-size:13px;
-  font-weight:500;
-  color:#e8c96a;
+font-family:‘DM Mono’,monospace;
+font-size:13px;
+font-weight:500;
+color:#e8c96a;
 }
 
 /* ── TABS ── */
 .tabs {
-  display:flex; gap:2px; margin-bottom:24px;
-  border-bottom:1px solid #2a3248;
-  background:#0f1117;
+display:flex; gap:2px; margin-bottom:24px;
+border-bottom:1px solid #2a3248;
+background:#0f1117;
 }
 .tab-btn {
-  font-family:'Playfair Display',serif;
-  font-style:italic;
-  font-size:14px;
-  color:#8a9eb8;
-  background:#0f1117; border:none; cursor:pointer;
-  padding:10px 20px;
-  border-bottom:2px solid transparent;
-  transition:all 0.2s;
-  letter-spacing:0.02em;
+font-family:‘Playfair Display’,serif;
+font-style:italic;
+font-size:14px;
+color:#8a9eb8;
+background:#0f1117; border:none; cursor:pointer;
+padding:10px 20px;
+border-bottom:2px solid transparent;
+transition:all 0.2s;
+letter-spacing:0.02em;
 }
 .tab-btn:hover { color:#dde6f0; background:#0f1117; }
 .tab-btn.active { color:#e8c96a; border-bottom-color:#c9a84c; background:#0f1117; }
@@ -257,27 +256,27 @@ header h1 span {
 .tbl-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; background:#0f1117; }
 
 table {
-  width:100%;
-  border-collapse:collapse;
-  font-size:13px;
-  background:#0f1117;
+width:100%;
+border-collapse:collapse;
+font-size:13px;
+background:#0f1117;
 }
 
 thead tr { background:#161b26; }
 
 thead th {
-  font-family:'DM Mono',monospace;
-  font-size:9px;
-  letter-spacing:0.15em;
-  text-transform:uppercase;
-  color:#8a9eb8;
-  padding:10px 10px 8px;
-  border-bottom:1px solid #2a3248;
-  text-align:left;
-  cursor:pointer;
-  white-space:nowrap;
-  user-select:none;
-  background:#161b26;
+font-family:‘DM Mono’,monospace;
+font-size:9px;
+letter-spacing:0.15em;
+text-transform:uppercase;
+color:#8a9eb8;
+padding:10px 10px 8px;
+border-bottom:1px solid #2a3248;
+text-align:left;
+cursor:pointer;
+white-space:nowrap;
+user-select:none;
+background:#161b26;
 }
 thead th:hover { color:#c9a84c; }
 thead th.sorted { color:#e8c96a; }
@@ -285,9 +284,9 @@ thead th.right { text-align:right; }
 thead th.center { text-align:center; }
 
 tbody tr {
-  border-bottom:1px solid rgba(201,168,76,0.06);
-  transition:background 0.15s;
-  background:#0f1117;
+border-bottom:1px solid rgba(201,168,76,0.06);
+transition:background 0.15s;
+background:#0f1117;
 }
 tbody tr:hover { background:#1c2233; }
 
@@ -297,48 +296,48 @@ tbody tr.value-mid  { border-left:2px solid rgba(201,168,76,0.4); }
 tbody tr.fade-row   { border-left:2px solid rgba(192,57,43,0.5); opacity:0.75; }
 
 td {
-  padding:10px 10px;
-  vertical-align:middle;
-  font-family:'Cormorant Garamond',serif;
-  font-size:14px;
+padding:10px 10px;
+vertical-align:middle;
+font-family:‘Cormorant Garamond’,serif;
+font-size:14px;
 }
 td.right { text-align:right; }
 td.center { text-align:center; }
-td.mono { font-family:'DM Mono',monospace; font-size:12px; }
+td.mono { font-family:‘DM Mono’,monospace; font-size:12px; }
 
 /* rank */
 .rank-num {
-  font-family:'DM Mono',monospace;
-  font-size:11px;
-  color:#7a90b0;
-  width:28px;
-  display:inline-block;
+font-family:‘DM Mono’,monospace;
+font-size:11px;
+color:#7a90b0;
+width:28px;
+display:inline-block;
 }
 
 /* player name */
 .player-name { font-size:14px; font-weight:600; letter-spacing:0.01em; }
-.player-country { font-family:'DM Mono',monospace; font-size:9px; color:#7a90b0; letter-spacing:0.1em; margin-top:1px; }
+.player-country { font-family:‘DM Mono’,monospace; font-size:9px; color:#7a90b0; letter-spacing:0.1em; margin-top:1px; }
 
 /* score bars */
 .score-bar-wrap { display:flex; align-items:center; gap:6px; }
 .score-bar-bg { flex:1; height:3px; background:rgba(255,255,255,0.08); border-radius:2px; min-width:40px; }
 .score-bar-fill { height:3px; border-radius:2px; }
-.score-val { font-family:'DM Mono',monospace; font-size:12px; font-weight:500; min-width:36px; text-align:right; }
+.score-val { font-family:‘DM Mono’,monospace; font-size:12px; font-weight:500; min-width:36px; text-align:right; }
 
 /* edge */
-.edge-pos { color:#3ddc84; font-family:'DM Mono',monospace; font-size:12px; font-weight:500; }
-.edge-neg { color:#e05252; font-family:'DM Mono',monospace; font-size:12px; }
-.edge-neutral { color:#8a9eb8; font-family:'DM Mono',monospace; font-size:12px; }
+.edge-pos { color:#3ddc84; font-family:‘DM Mono’,monospace; font-size:12px; font-weight:500; }
+.edge-neg { color:#e05252; font-family:‘DM Mono’,monospace; font-size:12px; }
+.edge-neutral { color:#8a9eb8; font-family:‘DM Mono’,monospace; font-size:12px; }
 
 /* signal badges */
 .signal {
-  font-family:'DM Mono',monospace;
-  font-size:9px;
-  letter-spacing:0.1em;
-  padding:3px 7px;
-  border-radius:2px;
-  white-space:nowrap;
-  text-transform:uppercase;
+font-family:‘DM Mono’,monospace;
+font-size:9px;
+letter-spacing:0.1em;
+padding:3px 7px;
+border-radius:2px;
+white-space:nowrap;
+text-transform:uppercase;
 }
 .sig-fire  { background:rgba(201,168,76,0.2); color:#e8c96a; border:1px solid rgba(201,168,76,0.4); }
 .sig-good  { background:rgba(61,220,132,0.1); color:#3ddc84; border:1px solid rgba(61,220,132,0.25); }
@@ -347,54 +346,54 @@ td.mono { font-family:'DM Mono',monospace; font-size:12px; }
 
 /* odds */
 .odds-val {
-  font-family:'DM Mono',monospace;
-  font-size:12px;
-  color:#dde6f0;
+font-family:‘DM Mono’,monospace;
+font-size:12px;
+color:#dde6f0;
 }
 
 /* prob */
 .prob-val {
-  font-family:'DM Mono',monospace;
-  font-size:12px;
-  color:#8a9eb8;
+font-family:‘DM Mono’,monospace;
+font-size:12px;
+color:#8a9eb8;
 }
 
 /* ── VALUE PICKS CARDS ── */
 .value-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:16px;
-  margin-bottom:28px;
-  background:#0f1117;
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+gap:16px;
+margin-bottom:28px;
+background:#0f1117;
 }
 
 .value-card {
-  background:#1c2233;
-  border:1px solid #2a3248;
-  border-radius:4px;
-  padding:20px;
-  backdrop-filter:blur(10px);
-  transition:transform 0.2s, border-color 0.2s;
-  position:relative;
-  overflow:hidden;
+background:#1c2233;
+border:1px solid #2a3248;
+border-radius:4px;
+padding:20px;
+backdrop-filter:blur(10px);
+transition:transform 0.2s, border-color 0.2s;
+position:relative;
+overflow:hidden;
 }
 .value-card::before {
-  content:'';
-  position:absolute;
-  top:0; left:0; right:0; height:2px;
-  background:linear-gradient(90deg,#3ddc84,#c9a84c);
+content:’’;
+position:absolute;
+top:0; left:0; right:0; height:2px;
+background:linear-gradient(90deg,#3ddc84,#c9a84c);
 }
 .value-card:hover { transform:translateY(-2px); border-color:rgba(201,168,76,0.5); }
 .value-card.top-pick::before { background:linear-gradient(90deg,#c9a84c,#e8c96a); }
 
-.vc-rank { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; color:#8a9eb8; margin-bottom:8px; text-transform:uppercase; }
-.vc-name { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; color:#ffffff; margin-bottom:4px; line-height:1.1; }
-.vc-country { font-family:'DM Mono',monospace; font-size:9px; color:#7a90b0; margin-bottom:12px; letter-spacing:0.1em; }
+.vc-rank { font-family:‘DM Mono’,monospace; font-size:9px; letter-spacing:0.2em; color:#8a9eb8; margin-bottom:8px; text-transform:uppercase; }
+.vc-name { font-family:‘Playfair Display’,serif; font-size:1.3rem; font-weight:700; color:#ffffff; margin-bottom:4px; line-height:1.1; }
+.vc-country { font-family:‘DM Mono’,monospace; font-size:9px; color:#7a90b0; margin-bottom:12px; letter-spacing:0.1em; }
 
 .vc-stats { display:flex; gap:16px; margin-bottom:12px; flex-wrap:wrap; }
 .vc-stat { }
-.vc-stat-label { font-family:'DM Mono',monospace; font-size:8px; color:#8a9eb8; letter-spacing:0.15em; text-transform:uppercase; }
-.vc-stat-val { font-family:'DM Mono',monospace; font-size:15px; font-weight:500; }
+.vc-stat-label { font-family:‘DM Mono’,monospace; font-size:8px; color:#8a9eb8; letter-spacing:0.15em; text-transform:uppercase; }
+.vc-stat-val { font-family:‘DM Mono’,monospace; font-size:15px; font-weight:500; }
 .vc-stat-val.gold { color:#e8c96a; }
 .vc-stat-val.green { color:#3ddc84; }
 
@@ -402,11 +401,11 @@ td.mono { font-family:'DM Mono',monospace; font-size:12px; }
 
 .vc-bets { display:flex; gap:6px; margin-top:10px; flex-wrap:wrap; }
 .vc-bet {
-  font-family:'DM Mono',monospace;
-  font-size:9px;
-  padding:3px 8px;
-  border-radius:2px;
-  letter-spacing:0.08em;
+font-family:‘DM Mono’,monospace;
+font-size:9px;
+padding:3px 8px;
+border-radius:2px;
+letter-spacing:0.08em;
 }
 .bet-win { background:rgba(201,168,76,0.15); color:#c9a84c; border:1px solid rgba(201,168,76,0.3); }
 .bet-t5  { background:rgba(61,220,132,0.08);  color:#3ddc84; border:1px solid rgba(61,220,132,0.2); }
@@ -415,180 +414,180 @@ td.mono { font-family:'DM Mono',monospace; font-size:12px; }
 /* ── FADES SECTION ── */
 .fade-list { display:flex; flex-direction:column; gap:8px; background:#0f1117; }
 .fade-item {
-  background:#1c2233;
-  border:1px solid rgba(192,57,43,0.3);
-  border-left:3px solid #e05252;
-  border-radius:2px;
-  padding:14px 16px;
-  display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+background:#1c2233;
+border:1px solid rgba(192,57,43,0.3);
+border-left:3px solid #e05252;
+border-radius:2px;
+padding:14px 16px;
+display:flex; align-items:center; gap:16px; flex-wrap:wrap;
 }
-.fi-name { font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:#dde6f0; flex:1; min-width:160px; }
-.fi-odds { font-family:'DM Mono',monospace; font-size:12px; color:#8a9eb8; }
+.fi-name { font-family:‘Playfair Display’,serif; font-size:16px; font-weight:700; color:#dde6f0; flex:1; min-width:160px; }
+.fi-odds { font-family:‘DM Mono’,monospace; font-size:12px; color:#8a9eb8; }
 .fi-reason { font-size:12px; color:#8a9eb8; font-style:italic; flex:2; min-width:200px; }
-.fi-badge { font-family:'DM Mono',monospace; font-size:9px; padding:3px 8px; border-radius:2px; background:rgba(192,57,43,0.2); color:#e07060; border:1px solid rgba(192,57,43,0.3); white-space:nowrap; }
+.fi-badge { font-family:‘DM Mono’,monospace; font-size:9px; padding:3px 8px; border-radius:2px; background:rgba(192,57,43,0.2); color:#e07060; border:1px solid rgba(192,57,43,0.3); white-space:nowrap; }
 
 /* ── MATCHUP SECTION ── */
 .matchup-intro {
-  font-family:'Cormorant Garamond',serif;
-  font-size:15px;
-  font-style:italic;
-  color:#8a9eb8;
-  margin-bottom:20px;
-  line-height:1.6;
-  text-align:center;
+font-family:‘Cormorant Garamond’,serif;
+font-size:15px;
+font-style:italic;
+color:#8a9eb8;
+margin-bottom:20px;
+line-height:1.6;
+text-align:center;
 }
 
 .matchup-list { display:flex; flex-direction:column; gap:12px; background:#0f1117; }
 .matchup-card {
-  background:#1c2233;
-  border:1px solid #2a3248;
-  border-radius:4px;
-  padding:16px 20px;
-  backdrop-filter:blur(8px);
+background:#1c2233;
+border:1px solid #2a3248;
+border-radius:4px;
+padding:16px 20px;
+backdrop-filter:blur(8px);
 }
 .mc-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px; }
-.mc-type { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.15em; color:#8a9eb8; text-transform:uppercase; }
-.mc-edge { font-family:'DM Mono',monospace; font-size:11px; }
+.mc-type { font-family:‘DM Mono’,monospace; font-size:9px; letter-spacing:0.15em; color:#8a9eb8; text-transform:uppercase; }
+.mc-edge { font-family:‘DM Mono’,monospace; font-size:11px; }
 
 .mc-players { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
 .mc-player { flex:1; min-width:120px; }
-.mc-pname { font-family:'Playfair Display',serif; font-size:16px; font-weight:700; }
+.mc-pname { font-family:‘Playfair Display’,serif; font-size:16px; font-weight:700; }
 .mc-pname.favored { color:#e8c96a; }
 .mc-pname.dog { color:#8a9eb8; }
-.mc-odds { font-family:'DM Mono',monospace; font-size:13px; margin-top:2px; }
+.mc-odds { font-family:‘DM Mono’,monospace; font-size:13px; margin-top:2px; }
 .mc-odds.fav-odds { color:#3ddc84; }
 .mc-odds.dog-odds { color:#c9a84c; }
 
-.mc-vs { font-family:'Playfair Display',serif; font-style:italic; font-size:14px; color:#7a90b0; padding:0 4px; }
+.mc-vs { font-family:‘Playfair Display’,serif; font-style:italic; font-size:14px; color:#7a90b0; padding:0 4px; }
 
 .mc-reason {
-  font-size:13px;
-  color:#8a9eb8;
-  font-style:italic;
-  margin-top:10px;
-  padding-top:10px;
-  border-top:1px solid #2a3248;
-  line-height:1.5;
+font-size:13px;
+color:#8a9eb8;
+font-style:italic;
+margin-top:10px;
+padding-top:10px;
+border-top:1px solid #2a3248;
+line-height:1.5;
 }
 
-.mc-signal { font-family:'DM Mono',monospace; font-size:9px; padding:3px 8px; border-radius:2px; }
+.mc-signal { font-family:‘DM Mono’,monospace; font-size:9px; padding:3px 8px; border-radius:2px; }
 
 /* ── AUGUSTA FACTOR BARS ── */
 .augusta-factors {
-  display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px;
+display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px;
 }
 @media(max-width:500px) { .augusta-factors { grid-template-columns:1fr; } }
 .af-card {
-  background:#1c2233;
-  border:1px solid #2a3248;
-  border-radius:4px;
-  padding:14px 16px;
+background:#1c2233;
+border:1px solid #2a3248;
+border-radius:4px;
+padding:14px 16px;
 }
-.af-title { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.15em; color:#c9a84c; text-transform:uppercase; margin-bottom:8px; }
+.af-title { font-family:‘DM Mono’,monospace; font-size:9px; letter-spacing:0.15em; color:#c9a84c; text-transform:uppercase; margin-bottom:8px; }
 .af-desc { font-size:12px; color:#8a9eb8; font-style:italic; line-height:1.4; }
 
 /* ── TOP 10 / TOP 5 TAB ── */
 .t10-intro {
-  font-family:'Cormorant Garamond',serif; font-style:italic;
-  font-size:14px; color:#8a9eb8; line-height:1.6;
-  text-align:center; margin-bottom:20px; background:#0f1117;
+font-family:‘Cormorant Garamond’,serif; font-style:italic;
+font-size:14px; color:#8a9eb8; line-height:1.6;
+text-align:center; margin-bottom:20px; background:#0f1117;
 }
 .t10-toggle {
-  display:flex; gap:8px; margin-bottom:20px; justify-content:center;
+display:flex; gap:8px; margin-bottom:20px; justify-content:center;
 }
 .t10-mkt-btn {
-  font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.12em;
-  padding:8px 24px; border-radius:3px; cursor:pointer; transition:all 0.2s;
-  text-transform:uppercase; border:1px solid #2a3248;
-  color:#7a90b0; background:#161b26;
+font-family:‘DM Mono’,monospace; font-size:11px; letter-spacing:0.12em;
+padding:8px 24px; border-radius:3px; cursor:pointer; transition:all 0.2s;
+text-transform:uppercase; border:1px solid #2a3248;
+color:#7a90b0; background:#161b26;
 }
 .t10-mkt-btn.active {
-  background:rgba(201,168,76,0.12); border-color:#c9a84c;
-  color:#e8c96a;
+background:rgba(201,168,76,0.12); border-color:#c9a84c;
+color:#e8c96a;
 }
 .t10-odds-header {
-  display:flex; justify-content:space-between; align-items:center;
-  margin-bottom:12px; flex-wrap:wrap; gap:10px;
-  font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.15em;
-  text-transform:uppercase; color:#8a9eb8;
+display:flex; justify-content:space-between; align-items:center;
+margin-bottom:12px; flex-wrap:wrap; gap:10px;
+font-family:‘DM Mono’,monospace; font-size:9px; letter-spacing:0.15em;
+text-transform:uppercase; color:#8a9eb8;
 }
 .t10-calc-btn {
-  font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em;
-  padding:7px 18px; border-radius:3px; cursor:pointer;
-  border:1px solid #c9a84c; color:#c9a84c;
-  background:rgba(201,168,76,0.1); transition:all 0.2s; text-transform:uppercase;
+font-family:‘DM Mono’,monospace; font-size:10px; letter-spacing:0.1em;
+padding:7px 18px; border-radius:3px; cursor:pointer;
+border:1px solid #c9a84c; color:#c9a84c;
+background:rgba(201,168,76,0.1); transition:all 0.2s; text-transform:uppercase;
 }
 .t10-calc-btn:hover { background:rgba(201,168,76,0.2); }
 
 .t10-input-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
-  gap:8px; margin-bottom:28px; background:#0f1117;
+display:grid;
+grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+gap:8px; margin-bottom:28px; background:#0f1117;
 }
 .t10-input-row {
-  display:flex; align-items:center; gap:8px;
-  background:#161b26; border:1px solid #2a3248;
-  border-radius:3px; padding:8px 12px;
+display:flex; align-items:center; gap:8px;
+background:#161b26; border:1px solid #2a3248;
+border-radius:3px; padding:8px 12px;
 }
 .t10-input-row:focus-within { border-color:rgba(201,168,76,0.4); }
 .t10-player-name {
-  font-family:'Cormorant Garamond',serif; font-size:13px;
-  color:#dde6f0; flex:1; min-width:0;
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+font-family:‘Cormorant Garamond’,serif; font-size:13px;
+color:#dde6f0; flex:1; min-width:0;
+white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
 .t10-score-badge {
-  font-family:'DM Mono',monospace; font-size:9px;
-  color:#8a9eb8; min-width:22px; text-align:center;
+font-family:‘DM Mono’,monospace; font-size:9px;
+color:#8a9eb8; min-width:22px; text-align:center;
 }
 .t10-odds-input {
-  font-family:'DM Mono',monospace; font-size:12px;
-  width:72px; background:#1c2233; border:1px solid #2a3248;
-  border-radius:2px; padding:4px 8px; color:#dde6f0;
-  text-align:center; outline:none;
+font-family:‘DM Mono’,monospace; font-size:12px;
+width:72px; background:#1c2233; border:1px solid #2a3248;
+border-radius:2px; padding:4px 8px; color:#dde6f0;
+text-align:center; outline:none;
 }
 .t10-odds-input:focus { border-color:#c9a84c; color:#e8c96a; }
 .t10-odds-input::placeholder { color:#8a9eb8; }
 
 /* Results */
 .t10-results-header {
-  display:flex; justify-content:space-between; align-items:baseline;
-  margin-bottom:12px; flex-wrap:wrap; gap:8px;
+display:flex; justify-content:space-between; align-items:baseline;
+margin-bottom:12px; flex-wrap:wrap; gap:8px;
 }
 .t10-results-title {
-  font-family:'Playfair Display',serif; font-size:1.1rem;
-  font-style:italic; color:#e8c96a;
+font-family:‘Playfair Display’,serif; font-size:1.1rem;
+font-style:italic; color:#e8c96a;
 }
 .t10-results-sub {
-  font-family:'DM Mono',monospace; font-size:9px;
-  letter-spacing:0.12em; color:#8a9eb8; text-transform:uppercase;
+font-family:‘DM Mono’,monospace; font-size:9px;
+letter-spacing:0.12em; color:#8a9eb8; text-transform:uppercase;
 }
 
 /* Best bets summary cards */
 .t10-best-wrap {
-  margin-top:24px;
+margin-top:24px;
 }
 .t10-best-title {
-  font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em;
-  color:#c9a84c; text-transform:uppercase; margin-bottom:12px;
-  display:flex; align-items:center; gap:10px;
+font-family:‘DM Mono’,monospace; font-size:9px; letter-spacing:0.2em;
+color:#c9a84c; text-transform:uppercase; margin-bottom:12px;
+display:flex; align-items:center; gap:10px;
 }
-.t10-best-title::after { content:''; flex:1; height:1px; background:#2a3248; }
+.t10-best-title::after { content:’’; flex:1; height:1px; background:#2a3248; }
 .t10-best-grid {
-  display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:12px;
+display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:12px;
 }
 .t10-best-card {
-  background:#161b26; border:1px solid #2a3248; border-radius:4px;
-  padding:14px 16px; position:relative; overflow:hidden;
+background:#161b26; border:1px solid #2a3248; border-radius:4px;
+padding:14px 16px; position:relative; overflow:hidden;
 }
 .t10-best-card::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:2px;
-  background:linear-gradient(90deg,#3ddc84,#c9a84c);
+content:’’; position:absolute; top:0; left:0; right:0; height:2px;
+background:linear-gradient(90deg,#3ddc84,#c9a84c);
 }
-.t10-bc-name { font-family:'Playfair Display',serif; font-size:15px; font-weight:700; color:#ffffff; margin-bottom:2px; }
-.t10-bc-mkt  { font-family:'DM Mono',monospace; font-size:9px; color:#8a9eb8; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:10px; }
+.t10-bc-name { font-family:‘Playfair Display’,serif; font-size:15px; font-weight:700; color:#ffffff; margin-bottom:2px; }
+.t10-bc-mkt  { font-family:‘DM Mono’,monospace; font-size:9px; color:#8a9eb8; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:10px; }
 .t10-bc-row  { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:4px; }
-.t10-bc-label { font-family:'DM Mono',monospace; font-size:9px; color:#8a9eb8; letter-spacing:0.1em; text-transform:uppercase; }
-.t10-bc-val  { font-family:'DM Mono',monospace; font-size:13px; font-weight:500; }
+.t10-bc-label { font-family:‘DM Mono’,monospace; font-size:9px; color:#8a9eb8; letter-spacing:0.1em; text-transform:uppercase; }
+.t10-bc-val  { font-family:‘DM Mono’,monospace; font-size:13px; font-weight:500; }
 .t10-bc-edge-pos { color:#4adf6a; }
 .t10-bc-edge-neg { color:#e05252; }
 .t10-bc-odds { color:#e8c96a; }
@@ -596,61 +595,61 @@ td.mono { font-family:'DM Mono',monospace; font-size:12px; }
 /* ── MARKET SECTIONS ── */
 .market-section { margin-bottom:28px; }
 .market-header { display:flex; align-items:baseline; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
-.market-label { font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:#e8c96a; }
-.market-sub { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.12em; color:#8a9eb8; }
+.market-label { font-family:‘Playfair Display’,serif; font-size:16px; font-weight:700; color:#e8c96a; }
+.market-sub { font-family:‘DM Mono’,monospace; font-size:9px; letter-spacing:0.12em; color:#8a9eb8; }
 .market-picks { display:flex; flex-direction:column; gap:8px; }
 
 .pick-row {
-  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
-  background:#1c2233; border:1px solid #2a3248;
-  border-radius:4px; padding:12px 16px;
-  transition:border-color 0.15s;
+display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+background:#1c2233; border:1px solid #2a3248;
+border-radius:4px; padding:12px 16px;
+transition:border-color 0.15s;
 }
 .pick-row:hover { border-color:rgba(201,168,76,0.5); }
 .pick-row.fire { border-left:3px solid #c9a84c; }
 
-.pr-rank { font-family:'DM Mono',monospace; font-size:11px; color:#8a9eb8; width:20px; flex-shrink:0; }
-.pr-name { font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:#dde6f0; flex:1; min-width:140px; }
-.pr-win  { font-family:'DM Mono',monospace; font-size:11px; color:#8a9eb8; }
+.pr-rank { font-family:‘DM Mono’,monospace; font-size:11px; color:#8a9eb8; width:20px; flex-shrink:0; }
+.pr-name { font-family:‘Playfair Display’,serif; font-size:16px; font-weight:700; color:#dde6f0; flex:1; min-width:140px; }
+.pr-win  { font-family:‘DM Mono’,monospace; font-size:11px; color:#8a9eb8; }
 .pr-stats { display:flex; gap:16px; margin-left:auto; flex-wrap:wrap; align-items:center; }
 .pr-stat { text-align:center; }
-.pr-stat-label { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:0.1em; color:#8a9eb8; text-transform:uppercase; }
-.pr-stat-val { font-family:'DM Mono',monospace; font-size:13px; font-weight:500; }
+.pr-stat-label { font-family:‘DM Mono’,monospace; font-size:8px; letter-spacing:0.1em; color:#8a9eb8; text-transform:uppercase; }
+.pr-stat-val { font-family:‘DM Mono’,monospace; font-size:13px; font-weight:500; }
 .pr-stat-val.green { color:#3ddc84; }
 .pr-stat-val.gold  { color:#e8c96a; }
-.pr-edge { font-family:'DM Mono',monospace; font-size:13px; font-weight:600; }
+.pr-edge { font-family:‘DM Mono’,monospace; font-size:13px; font-weight:600; }
 .pr-edge.pos { color:#3ddc84; }
-.pr-signal { font-family:'DM Mono',monospace; font-size:9px; padding:3px 8px; border-radius:2px; }
+.pr-signal { font-family:‘DM Mono’,monospace; font-size:9px; padding:3px 8px; border-radius:2px; }
 
 /* ── SPONSORS ── */
 .sponsors {
-  display:flex; justify-content:center; gap:28px; flex-wrap:wrap;
-  margin-top:48px; padding-top:24px;
-  border-top:1px solid #2a3248;
+display:flex; justify-content:center; gap:28px; flex-wrap:wrap;
+margin-top:48px; padding-top:24px;
+border-top:1px solid #2a3248;
 }
 .sponsor {
-  font-family:'DM Mono',monospace;
-  font-size:9px;
-  letter-spacing:0.12em;
-  color:#7a90b0;
-  text-transform:uppercase;
+font-family:‘DM Mono’,monospace;
+font-size:9px;
+letter-spacing:0.12em;
+color:#7a90b0;
+text-transform:uppercase;
 }
 
 /* ── GREEN JACKET DECORATION ── */
 .jacket-deco {
-  position:fixed;
-  top:0; right:-80px;
-  width:200px; height:200px;
-  opacity:0.04;
-  pointer-events:none;
-  z-index:0;
+position:fixed;
+top:0; right:-80px;
+width:200px; height:200px;
+opacity:0.04;
+pointer-events:none;
+z-index:0;
 }
 
 /* ── MOBILE ── */
 @media(max-width:600px) {
-  .tab-btn { padding:8px 12px; font-size:13px; }
-  td, thead th { padding:8px 6px; }
-  .value-grid { grid-template-columns:1fr; }
+.tab-btn { padding:8px 12px; font-size:13px; }
+td, thead th { padding:8px 6px; }
+.value-grid { grid-template-columns:1fr; }
 }
 
 /* ── ANIMATIONS ── */
@@ -663,18 +662,20 @@ header { animation-delay:0s; }
 
 /* Augusta National hole 12 flower decoration */
 .azalea {
-  display:inline-block;
-  width:6px; height:6px;
-  background:#c9a84c;
-  border-radius:50%;
-  opacity:0.6;
-  margin:0 4px;
+display:inline-block;
+width:6px; height:6px;
+background:#c9a84c;
+border-radius:50%;
+opacity:0.6;
+margin:0 4px;
 }
 </style>
+
 </head>
 <body>
 
 <!-- Green jacket watermark -->
+
 <svg class="jacket-deco" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:fixed;top:0;right:-80px;width:200px;height:200px;opacity:0.03;pointer-events:none;z-index:0;">
   <path d="M40 20 L80 20 L90 60 L160 40 L160 180 L40 180 Z" fill="#c9a84c"/>
   <rect x="40" y="20" width="40" height="160" fill="#c9a84c"/>
@@ -683,6 +684,7 @@ header { animation-delay:0s; }
 <div class="container">
 
 <!-- HEADER -->
+
 <header>
   <div class="magnolia-deco">
     <div class="line"></div>
@@ -709,211 +711,215 @@ header { animation-delay:0s; }
 </header>
 
 <!-- FEATURED HOLE: 12 — Golden Bell -->
+
 <div class="featured-hole">
   <div class="fh-azalea-stripe"></div>
   <div class="fh-layout">
 
-    <!-- LEFT: info -->
-    <div class="fh-left">
-      <div>
-        <div class="fh-eyebrow">Amen Corner · Augusta National</div>
-        <div class="fh-title">Golden Bell</div>
-        <div class="fh-subtitle">Hole 12 · Par 3 · The Most Famous Short Hole in Golf</div>
-        <div class="fh-stats">
-          <div class="fh-stat">
-            <div class="fh-stat-label">Yardage</div>
-            <div class="fh-stat-val">155</div>
-            <div class="fh-stat-sub">yds over Rae's Creek</div>
-          </div>
-          <div class="fh-stat">
-            <div class="fh-stat-label">Par</div>
-            <div class="fh-stat-val">3</div>
-            <div class="fh-stat-sub">narrowest green Augusta</div>
-          </div>
-          <div class="fh-stat">
-            <div class="fh-stat-label">Avg Score</div>
-            <div class="fh-stat-val">3.28</div>
-            <div class="fh-stat-sub">hardest par 3 on tour</div>
-          </div>
-          <div class="fh-stat">
-            <div class="fh-stat-label">Wind</div>
-            <div class="fh-stat-val">⚑</div>
-            <div class="fh-stat-sub">swirls — unreadable</div>
-          </div>
-        </div>
+```
+<!-- LEFT: info -->
+<div class="fh-left">
+  <div>
+    <div class="fh-eyebrow">Amen Corner · Augusta National</div>
+    <div class="fh-title">Golden Bell</div>
+    <div class="fh-subtitle">Hole 12 · Par 3 · The Most Famous Short Hole in Golf</div>
+    <div class="fh-stats">
+      <div class="fh-stat">
+        <div class="fh-stat-label">Yardage</div>
+        <div class="fh-stat-val">155</div>
+        <div class="fh-stat-sub">yds over Rae's Creek</div>
       </div>
-      <div class="fh-quote">
-        "The wind swirls through the pines and magnolias and can change three times before your ball lands. The creek collects mistakes without mercy. Many a green jacket has been lost at 12."
+      <div class="fh-stat">
+        <div class="fh-stat-label">Par</div>
+        <div class="fh-stat-val">3</div>
+        <div class="fh-stat-sub">narrowest green Augusta</div>
+      </div>
+      <div class="fh-stat">
+        <div class="fh-stat-label">Avg Score</div>
+        <div class="fh-stat-val">3.28</div>
+        <div class="fh-stat-sub">hardest par 3 on tour</div>
+      </div>
+      <div class="fh-stat">
+        <div class="fh-stat-label">Wind</div>
+        <div class="fh-stat-val">⚑</div>
+        <div class="fh-stat-sub">swirls — unreadable</div>
       </div>
     </div>
+  </div>
+  <div class="fh-quote">
+    "The wind swirls through the pines and magnolias and can change three times before your ball lands. The creek collects mistakes without mercy. Many a green jacket has been lost at 12."
+  </div>
+</div>
 
-    <!-- RIGHT: animated SVG -->
-    <div class="fh-right">
-      <div class="fh-hole-label">12th hole · golden bell</div>
-      <div class="fh-svg-wrap">
-        <svg width="240" height="175" viewBox="0 0 240 175" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- RIGHT: animated SVG -->
+<div class="fh-right">
+  <div class="fh-hole-label">12th hole · golden bell</div>
+  <div class="fh-svg-wrap">
+    <svg width="240" height="175" viewBox="0 0 240 175" fill="none" xmlns="http://www.w3.org/2000/svg">
 
-          <!-- Sky / background -->
-          <rect width="240" height="175" fill="#030c05" rx="2"/>
-          <rect width="240" height="100" fill="url(#skyGrad)" rx="2"/>
+      <!-- Sky / background -->
+      <rect width="240" height="175" fill="#030c05" rx="2"/>
+      <rect width="240" height="100" fill="url(#skyGrad)" rx="2"/>
 
-          <!-- Sky gradient -->
-          <defs>
-            <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#071a0a"/>
-              <stop offset="100%" stop-color="#0d2a10"/>
-            </linearGradient>
-            <linearGradient id="creekGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#0a2535"/>
-              <stop offset="100%" stop-color="#061520"/>
-            </linearGradient>
-            <linearGradient id="greenGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#1e6b28"/>
-              <stop offset="100%" stop-color="#155020"/>
-            </linearGradient>
-          </defs>
+      <!-- Sky gradient -->
+      <defs>
+        <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#071a0a"/>
+          <stop offset="100%" stop-color="#0d2a10"/>
+        </linearGradient>
+        <linearGradient id="creekGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0a2535"/>
+          <stop offset="100%" stop-color="#061520"/>
+        </linearGradient>
+        <linearGradient id="greenGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1e6b28"/>
+          <stop offset="100%" stop-color="#155020"/>
+        </linearGradient>
+      </defs>
 
-          <!-- Distant pine trees (Amen Corner treeline) -->
-          <!-- Tree group left -->
-          <rect x="0" y="28" width="8" height="50" fill="#071a09"/>
-          <polygon points="4,8 -4,42 12,42" fill="#0a2210"/>
-          <polygon points="4,18 -3,46 11,46" fill="#0c2812"/>
-          <rect x="16" y="32" width="7" height="46" fill="#071a09"/>
-          <polygon points="19,10 12,44 26,44" fill="#0a2210"/>
-          <polygon points="19,20 13,48 25,48" fill="#0c2812"/>
-          <rect x="30" y="35" width="6" height="43" fill="#071a09"/>
-          <polygon points="33,14 27,46 39,46" fill="#0a2210"/>
+      <!-- Distant pine trees (Amen Corner treeline) -->
+      <!-- Tree group left -->
+      <rect x="0" y="28" width="8" height="50" fill="#071a09"/>
+      <polygon points="4,8 -4,42 12,42" fill="#0a2210"/>
+      <polygon points="4,18 -3,46 11,46" fill="#0c2812"/>
+      <rect x="16" y="32" width="7" height="46" fill="#071a09"/>
+      <polygon points="19,10 12,44 26,44" fill="#0a2210"/>
+      <polygon points="19,20 13,48 25,48" fill="#0c2812"/>
+      <rect x="30" y="35" width="6" height="43" fill="#071a09"/>
+      <polygon points="33,14 27,46 39,46" fill="#0a2210"/>
 
-          <!-- Tree group right -->
-          <rect x="206" y="30" width="8" height="48" fill="#071a09"/>
-          <polygon points="210,9 202,42 218,42" fill="#0a2210"/>
-          <polygon points="210,19 203,46 217,46" fill="#0c2812"/>
-          <rect x="220" y="34" width="7" height="44" fill="#071a09"/>
-          <polygon points="223,12 216,44 230,44" fill="#0a2210"/>
-          <rect x="232" y="36" width="8" height="42" fill="#071a09"/>
-          <polygon points="236,15 229,46 243,46" fill="#0a2210"/>
+      <!-- Tree group right -->
+      <rect x="206" y="30" width="8" height="48" fill="#071a09"/>
+      <polygon points="210,9 202,42 218,42" fill="#0a2210"/>
+      <polygon points="210,19 203,46 217,46" fill="#0c2812"/>
+      <rect x="220" y="34" width="7" height="44" fill="#071a09"/>
+      <polygon points="223,12 216,44 230,44" fill="#0a2210"/>
+      <rect x="232" y="36" width="8" height="42" fill="#071a09"/>
+      <polygon points="236,15 229,46 243,46" fill="#0a2210"/>
 
-          <!-- Middle background trees (darker, further) -->
-          <rect x="52" y="38" width="5" height="40" fill="#081c0a"/>
-          <polygon points="54,22 49,50 59,50" fill="#0a2010"/>
-          <rect x="170" y="40" width="5" height="38" fill="#081c0a"/>
-          <polygon points="172,24 167,50 177,50" fill="#0a2010"/>
-          <rect x="140" y="42" width="4" height="36" fill="#081c0a"/>
-          <polygon points="142,26 138,50 146,50" fill="#0a2010"/>
+      <!-- Middle background trees (darker, further) -->
+      <rect x="52" y="38" width="5" height="40" fill="#081c0a"/>
+      <polygon points="54,22 49,50 59,50" fill="#0a2010"/>
+      <rect x="170" y="40" width="5" height="38" fill="#081c0a"/>
+      <polygon points="172,24 167,50 177,50" fill="#0a2010"/>
+      <rect x="140" y="42" width="4" height="36" fill="#081c0a"/>
+      <polygon points="142,26 138,50 146,50" fill="#0a2010"/>
 
-          <!-- Azalea bushes behind green — the blooms! -->
-          <!-- Left azalea bank -->
-          <ellipse cx="42" cy="62" rx="22" ry="14" fill="#3d0e1e" class="azalea-bloom"/>
-          <ellipse cx="58" cy="58" rx="18" ry="12" fill="#6b1530" class="azalea-bloom2"/>
-          <ellipse cx="35" cy="68" rx="15" ry="10" fill="#8b1a3a" class="azalea-bloom"/>
-          <!-- Azalea flowers left -->
-          <circle cx="38" cy="55" r="5" fill="#c0397a" opacity="0.85" class="azalea-bloom"/>
-          <circle cx="50" cy="52" r="4" fill="#e85d9a" opacity="0.8" class="azalea-bloom2"/>
-          <circle cx="62" cy="56" r="3.5" fill="#d44d85" opacity="0.75" class="azalea-bloom"/>
-          <circle cx="44" cy="62" r="3" fill="#f07ab0" opacity="0.7" class="azalea-bloom3"/>
-          <circle cx="30" cy="60" r="4" fill="#c0397a" opacity="0.8" class="azalea-bloom2"/>
-          <circle cx="56" cy="60" r="3" fill="#e85d9a" opacity="0.65" class="azalea-bloom"/>
+      <!-- Azalea bushes behind green — the blooms! -->
+      <!-- Left azalea bank -->
+      <ellipse cx="42" cy="62" rx="22" ry="14" fill="#3d0e1e" class="azalea-bloom"/>
+      <ellipse cx="58" cy="58" rx="18" ry="12" fill="#6b1530" class="azalea-bloom2"/>
+      <ellipse cx="35" cy="68" rx="15" ry="10" fill="#8b1a3a" class="azalea-bloom"/>
+      <!-- Azalea flowers left -->
+      <circle cx="38" cy="55" r="5" fill="#c0397a" opacity="0.85" class="azalea-bloom"/>
+      <circle cx="50" cy="52" r="4" fill="#e85d9a" opacity="0.8" class="azalea-bloom2"/>
+      <circle cx="62" cy="56" r="3.5" fill="#d44d85" opacity="0.75" class="azalea-bloom"/>
+      <circle cx="44" cy="62" r="3" fill="#f07ab0" opacity="0.7" class="azalea-bloom3"/>
+      <circle cx="30" cy="60" r="4" fill="#c0397a" opacity="0.8" class="azalea-bloom2"/>
+      <circle cx="56" cy="60" r="3" fill="#e85d9a" opacity="0.65" class="azalea-bloom"/>
 
-          <!-- Right azalea bank -->
-          <ellipse cx="195" cy="61" rx="22" ry="14" fill="#3d0e1e" class="azalea-bloom2"/>
-          <ellipse cx="180" cy="57" rx="18" ry="12" fill="#6b1530" class="azalea-bloom3"/>
-          <ellipse cx="205" cy="67" rx="15" ry="10" fill="#8b1a3a" class="azalea-bloom2"/>
-          <!-- Flowers right -->
-          <circle cx="200" cy="54" r="5" fill="#c0397a" opacity="0.85" class="azalea-bloom2"/>
-          <circle cx="188" cy="51" r="4" fill="#e85d9a" opacity="0.8" class="azalea-bloom"/>
-          <circle cx="176" cy="55" r="3.5" fill="#d44d85" opacity="0.75" class="azalea-bloom3"/>
-          <circle cx="194" cy="61" r="3" fill="#f07ab0" opacity="0.7" class="azalea-bloom"/>
-          <circle cx="210" cy="59" r="4" fill="#c0397a" opacity="0.8" class="azalea-bloom2"/>
-          <circle cx="182" cy="59" r="3" fill="#e85d9a" opacity="0.65" class="azalea-bloom3"/>
+      <!-- Right azalea bank -->
+      <ellipse cx="195" cy="61" rx="22" ry="14" fill="#3d0e1e" class="azalea-bloom2"/>
+      <ellipse cx="180" cy="57" rx="18" ry="12" fill="#6b1530" class="azalea-bloom3"/>
+      <ellipse cx="205" cy="67" rx="15" ry="10" fill="#8b1a3a" class="azalea-bloom2"/>
+      <!-- Flowers right -->
+      <circle cx="200" cy="54" r="5" fill="#c0397a" opacity="0.85" class="azalea-bloom2"/>
+      <circle cx="188" cy="51" r="4" fill="#e85d9a" opacity="0.8" class="azalea-bloom"/>
+      <circle cx="176" cy="55" r="3.5" fill="#d44d85" opacity="0.75" class="azalea-bloom3"/>
+      <circle cx="194" cy="61" r="3" fill="#f07ab0" opacity="0.7" class="azalea-bloom"/>
+      <circle cx="210" cy="59" r="4" fill="#c0397a" opacity="0.8" class="azalea-bloom2"/>
+      <circle cx="182" cy="59" r="3" fill="#e85d9a" opacity="0.65" class="azalea-bloom3"/>
 
-          <!-- Azalea behind green center -->
-          <ellipse cx="120" cy="56" rx="30" ry="14" fill="#2a0c17" class="azalea-bloom3"/>
-          <circle cx="108" cy="50" r="4" fill="#c0397a" opacity="0.7" class="azalea-bloom"/>
-          <circle cx="120" cy="48" r="5" fill="#e85d9a" opacity="0.75" class="azalea-bloom2"/>
-          <circle cx="132" cy="51" r="4" fill="#d44d85" opacity="0.7" class="azalea-bloom3"/>
-          <circle cx="115" cy="55" r="3" fill="#f07ab0" opacity="0.6" class="azalea-bloom"/>
-          <circle cx="126" cy="54" r="3" fill="#c0397a" opacity="0.65" class="azalea-bloom2"/>
+      <!-- Azalea behind green center -->
+      <ellipse cx="120" cy="56" rx="30" ry="14" fill="#2a0c17" class="azalea-bloom3"/>
+      <circle cx="108" cy="50" r="4" fill="#c0397a" opacity="0.7" class="azalea-bloom"/>
+      <circle cx="120" cy="48" r="5" fill="#e85d9a" opacity="0.75" class="azalea-bloom2"/>
+      <circle cx="132" cy="51" r="4" fill="#d44d85" opacity="0.7" class="azalea-bloom3"/>
+      <circle cx="115" cy="55" r="3" fill="#f07ab0" opacity="0.6" class="azalea-bloom"/>
+      <circle cx="126" cy="54" r="3" fill="#c0397a" opacity="0.65" class="azalea-bloom2"/>
 
-          <!-- Green surrounds (collar) -->
-          <ellipse cx="120" cy="88" rx="68" ry="22" fill="#0d3015" opacity="0.9"/>
+      <!-- Green surrounds (collar) -->
+      <ellipse cx="120" cy="88" rx="68" ry="22" fill="#0d3015" opacity="0.9"/>
 
-          <!-- The green itself — narrow & iconic -->
-          <ellipse cx="120" cy="85" rx="58" ry="17" fill="url(#greenGrad)"/>
-          <ellipse cx="120" cy="84" rx="52" ry="14" fill="#1e6b28"/>
-          <!-- Mowing stripes on green -->
-          <line x1="68" y1="84" x2="172" y2="84" stroke="#1a5e22" stroke-width="2.5" opacity="0.4"/>
-          <line x1="70" y1="80" x2="170" y2="80" stroke="#226a2a" stroke-width="2" opacity="0.3"/>
-          <line x1="70" y1="88" x2="170" y2="88" stroke="#226a2a" stroke-width="2" opacity="0.3"/>
+      <!-- The green itself — narrow & iconic -->
+      <ellipse cx="120" cy="85" rx="58" ry="17" fill="url(#greenGrad)"/>
+      <ellipse cx="120" cy="84" rx="52" ry="14" fill="#1e6b28"/>
+      <!-- Mowing stripes on green -->
+      <line x1="68" y1="84" x2="172" y2="84" stroke="#1a5e22" stroke-width="2.5" opacity="0.4"/>
+      <line x1="70" y1="80" x2="170" y2="80" stroke="#226a2a" stroke-width="2" opacity="0.3"/>
+      <line x1="70" y1="88" x2="170" y2="88" stroke="#226a2a" stroke-width="2" opacity="0.3"/>
 
-          <!-- Front bunker left -->
-          <ellipse cx="80" cy="97" rx="18" ry="8" fill="#c8b07a" opacity="0.6"/>
-          <ellipse cx="80" cy="96" rx="15" ry="6" fill="#d4bc88" opacity="0.5"/>
+      <!-- Front bunker left -->
+      <ellipse cx="80" cy="97" rx="18" ry="8" fill="#c8b07a" opacity="0.6"/>
+      <ellipse cx="80" cy="96" rx="15" ry="6" fill="#d4bc88" opacity="0.5"/>
 
-          <!-- Front bunker right -->
-          <ellipse cx="162" cy="97" rx="16" ry="7" fill="#c8b07a" opacity="0.55"/>
-          <ellipse cx="162" cy="96" rx="13" ry="5" fill="#d4bc88" opacity="0.45"/>
+      <!-- Front bunker right -->
+      <ellipse cx="162" cy="97" rx="16" ry="7" fill="#c8b07a" opacity="0.55"/>
+      <ellipse cx="162" cy="96" rx="13" ry="5" fill="#d4bc88" opacity="0.45"/>
 
-          <!-- Rae's Creek — the famous water -->
-          <rect x="0" y="108" width="240" height="32" fill="url(#creekGrad)" rx="1"/>
-          <!-- Creek water shimmer -->
-          <line x1="20" y1="116" x2="80" y2="114" stroke="#1a4a65" stroke-width="0.6" opacity="0.5"/>
-          <line x1="100" y1="118" x2="160" y2="116" stroke="#1a4a65" stroke-width="0.6" opacity="0.5"/>
-          <line x1="170" y1="115" x2="220" y2="117" stroke="#1a4a65" stroke-width="0.6" opacity="0.5"/>
-          <!-- Creek ripples (animated) -->
-          <circle cx="60" cy="120" r="4" stroke="#2a6a90" stroke-width="0.8" fill="none" class="creek-ripple"/>
-          <circle cx="120" cy="118" r="3" stroke="#2a6a90" stroke-width="0.8" fill="none" class="creek-ripple2"/>
-          <circle cx="180" cy="121" r="4" stroke="#2a6a90" stroke-width="0.8" fill="none" class="creek-ripple3"/>
-          <!-- Creek label -->
-          <text x="120" y="128" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#2a5a70" letter-spacing="2" opacity="0.7">RAE'S CREEK</text>
+      <!-- Rae's Creek — the famous water -->
+      <rect x="0" y="108" width="240" height="32" fill="url(#creekGrad)" rx="1"/>
+      <!-- Creek water shimmer -->
+      <line x1="20" y1="116" x2="80" y2="114" stroke="#1a4a65" stroke-width="0.6" opacity="0.5"/>
+      <line x1="100" y1="118" x2="160" y2="116" stroke="#1a4a65" stroke-width="0.6" opacity="0.5"/>
+      <line x1="170" y1="115" x2="220" y2="117" stroke="#1a4a65" stroke-width="0.6" opacity="0.5"/>
+      <!-- Creek ripples (animated) -->
+      <circle cx="60" cy="120" r="4" stroke="#2a6a90" stroke-width="0.8" fill="none" class="creek-ripple"/>
+      <circle cx="120" cy="118" r="3" stroke="#2a6a90" stroke-width="0.8" fill="none" class="creek-ripple2"/>
+      <circle cx="180" cy="121" r="4" stroke="#2a6a90" stroke-width="0.8" fill="none" class="creek-ripple3"/>
+      <!-- Creek label -->
+      <text x="120" y="128" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#2a5a70" letter-spacing="2" opacity="0.7">RAE'S CREEK</text>
 
-          <!-- Stone bridge (iconic Hogan Bridge nearby) -->
-          <rect x="104" y="108" width="32" height="7" fill="#3a3530" rx="1"/>
-          <rect x="106" y="106" width="28" height="3" fill="#4a4540" rx="1"/>
-          <!-- Bridge stones -->
-          <line x1="112" y1="108" x2="112" y2="115" stroke="#2a2520" stroke-width="0.6" opacity="0.6"/>
-          <line x1="120" y1="108" x2="120" y2="115" stroke="#2a2520" stroke-width="0.6" opacity="0.6"/>
-          <line x1="128" y1="108" x2="128" y2="115" stroke="#2a2520" stroke-width="0.6" opacity="0.6"/>
+      <!-- Stone bridge (iconic Hogan Bridge nearby) -->
+      <rect x="104" y="108" width="32" height="7" fill="#3a3530" rx="1"/>
+      <rect x="106" y="106" width="28" height="3" fill="#4a4540" rx="1"/>
+      <!-- Bridge stones -->
+      <line x1="112" y1="108" x2="112" y2="115" stroke="#2a2520" stroke-width="0.6" opacity="0.6"/>
+      <line x1="120" y1="108" x2="120" y2="115" stroke="#2a2520" stroke-width="0.6" opacity="0.6"/>
+      <line x1="128" y1="108" x2="128" y2="115" stroke="#2a2520" stroke-width="0.6" opacity="0.6"/>
 
-          <!-- Tee box area (foreground) -->
-          <rect x="0" y="140" width="240" height="35" fill="#0a2212" rx="1"/>
-          <ellipse cx="120" cy="142" rx="30" ry="6" fill="#0e2a16" opacity="0.8"/>
-          <!-- Tee markers -->
-          <rect x="110" y="138" width="5" height="8" rx="1" fill="#c9a84c" opacity="0.7"/>
-          <rect x="125" y="138" width="5" height="8" rx="1" fill="#c9a84c" opacity="0.7"/>
+      <!-- Tee box area (foreground) -->
+      <rect x="0" y="140" width="240" height="35" fill="#0a2212" rx="1"/>
+      <ellipse cx="120" cy="142" rx="30" ry="6" fill="#0e2a16" opacity="0.8"/>
+      <!-- Tee markers -->
+      <rect x="110" y="138" width="5" height="8" rx="1" fill="#c9a84c" opacity="0.7"/>
+      <rect x="125" y="138" width="5" height="8" rx="1" fill="#c9a84c" opacity="0.7"/>
 
-          <!-- Flag pin on green -->
-          <line x1="120" y1="52" x2="120" y2="82" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
-          <!-- Flag (Masters yellow) -->
-          <path d="M120 52 Q134 56 132 63 Q130 68 120 66 Z" fill="#c9a84c" opacity="0.95"/>
+      <!-- Flag pin on green -->
+      <line x1="120" y1="52" x2="120" y2="82" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- Flag (Masters yellow) -->
+      <path d="M120 52 Q134 56 132 63 Q130 68 120 66 Z" fill="#c9a84c" opacity="0.95"/>
 
-          <!-- Golf ball on green (someone made it!) -->
-          <circle cx="108" cy="83" r="2.5" fill="#f5f5f0" opacity="0.85"/>
-          <circle cx="108" cy="83" r="2.5" fill="none" stroke="#ddd" stroke-width="0.4"/>
+      <!-- Golf ball on green (someone made it!) -->
+      <circle cx="108" cy="83" r="2.5" fill="#f5f5f0" opacity="0.85"/>
+      <circle cx="108" cy="83" r="2.5" fill="none" stroke="#ddd" stroke-width="0.4"/>
 
-          <!-- Yardage label -->
-          <text x="120" y="103" text-anchor="middle" font-family="'DM Mono',monospace" font-size="8" fill="#3ddc84" opacity="0.55" letter-spacing="1">155 YDS</text>
+      <!-- Yardage label -->
+      <text x="120" y="103" text-anchor="middle" font-family="'DM Mono',monospace" font-size="8" fill="#3ddc84" opacity="0.55" letter-spacing="1">155 YDS</text>
 
-          <!-- Wind swirl indicator top right -->
-          <text x="215" y="25" text-anchor="middle" font-family="'DM Mono',monospace" font-size="8" fill="#c9a84c" opacity="0.4" letter-spacing="0.5">WIND</text>
-          <path d="M205 30 Q215 28 218 33 Q220 37 215 38 Q210 39 210 35" stroke="#c9a84c" stroke-width="0.8" fill="none" opacity="0.35" stroke-linecap="round"/>
+      <!-- Wind swirl indicator top right -->
+      <text x="215" y="25" text-anchor="middle" font-family="'DM Mono',monospace" font-size="8" fill="#c9a84c" opacity="0.4" letter-spacing="0.5">WIND</text>
+      <path d="M205 30 Q215 28 218 33 Q220 37 215 38 Q210 39 210 35" stroke="#c9a84c" stroke-width="0.8" fill="none" opacity="0.35" stroke-linecap="round"/>
 
-          <!-- Bottom label -->
-          <text x="120" y="168" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#2d5535" letter-spacing="3" opacity="0.7">AUGUSTA NATIONAL</text>
+      <!-- Bottom label -->
+      <text x="120" y="168" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#2d5535" letter-spacing="3" opacity="0.7">AUGUSTA NATIONAL</text>
 
-        </svg>
-      </div>
-      <div class="fh-chips">
-        <span class="fh-chip">Par 3</span>
-        <span class="fh-chip">155 Yds</span>
-        <span class="fh-chip pink">Azalea Season</span>
-        <span class="fh-chip">Amen Corner</span>
-      </div>
-    </div>
+    </svg>
+  </div>
+  <div class="fh-chips">
+    <span class="fh-chip">Par 3</span>
+    <span class="fh-chip">155 Yds</span>
+    <span class="fh-chip pink">Azalea Season</span>
+    <span class="fh-chip">Amen Corner</span>
+  </div>
+</div>
+```
 
   </div>
 </div>
 
 <!-- WEIGHT BREAKDOWN -->
+
 <div class="weights-card">
   <div class="weights-title">Augusta Model Weights — v2.0 · Real DataGolf SG Data</div>
   <div class="weights-grid">
@@ -951,6 +957,7 @@ header { animation-delay:0s; }
 </div>
 
 <!-- AUGUSTA FACTORS -->
+
 <div class="augusta-factors">
   <div class="af-card">
     <div class="af-title">🏌️ Distance Premium</div>
@@ -971,6 +978,7 @@ header { animation-delay:0s; }
 </div>
 
 <!-- TABS -->
+
 <div class="tabs">
   <button class="tab-btn active" onclick="switchTab('rankings')">Full Rankings</button>
   <button class="tab-btn" onclick="switchTab('value')">Value Picks</button>
@@ -982,6 +990,7 @@ header { animation-delay:0s; }
 <!-- ═══════════════════════════════════════════════════
      TAB 1 — FULL RANKINGS
 ═══════════════════════════════════════════════════ -->
+
 <div class="tab-panel active" id="tab-rankings">
 <div class="tbl-wrap">
 <table id="rankings-tbl">
@@ -1005,9 +1014,11 @@ header { animation-delay:0s; }
 <!-- ═══════════════════════════════════════════════════
      TAB 2 — VALUE PICKS
 ═══════════════════════════════════════════════════ -->
+
 <div class="tab-panel" id="tab-value">
 
 <!-- T10/T5 Picks Section -->
+
 <div class="market-section">
   <div class="market-header">
     <span class="market-label">🎯 Top 10 Picks — Best Edge</span>
@@ -1037,6 +1048,7 @@ header { animation-delay:0s; }
 <!-- ═══════════════════════════════════════════════════
      TAB 3 — FADES
 ═══════════════════════════════════════════════════ -->
+
 <div class="tab-panel" id="tab-fades">
 <div class="fade-list" id="fade-list"></div>
 </div>
@@ -1044,6 +1056,7 @@ header { animation-delay:0s; }
 <!-- ═══════════════════════════════════════════════════
      TAB 4 — MATCHUP EDGE
 ═══════════════════════════════════════════════════ -->
+
 <div class="tab-panel" id="tab-matchups">
 <p class="matchup-intro">
   Head-to-head matchup edges derived from the Augusta model — prioritizing distance, approach, and course history differentials.
@@ -1054,28 +1067,48 @@ header { animation-delay:0s; }
 <!-- ═══════════════════════════════════════════════════
      TAB: TOP 10 / TOP 5
 ═══════════════════════════════════════════════════ -->
+
 <div class="tab-panel" id="tab-top10">
 
-  <!-- Intro -->
-  <div class="t10-intro">
-    Enter your book's Top 10 and Top 5 finish odds below. The model calculates edge based on our DataGolf SG scores. Positive edge = value bet.
+  <!-- Pre-loaded picks header -->
+
+  <div class="t10-loaded-banner">
+    <span class="t10-loaded-icon">📊</span>
+    <span>Real book odds loaded — Thursday Apr 3, 2026 · Sorted by model edge</span>
   </div>
 
   <!-- Market toggle -->
+
   <div class="t10-toggle">
-    <button class="t10-mkt-btn active" id="btn-t10" onclick="setMarket('t10')">Top 10 Finish</button>
-    <button class="t10-mkt-btn" id="btn-t5" onclick="setMarket('t5')">Top 5 Finish</button>
+    <button class="t10-mkt-btn active" id="btn-t10" onclick="setMarket('t10')">Top 10</button>
+    <button class="t10-mkt-btn" id="btn-t5"  onclick="setMarket('t5')">Top 5</button>
+    <button class="t10-mkt-btn" id="btn-t20" onclick="setMarket('t20')">Top 20</button>
   </div>
 
-  <!-- Odds input grid -->
+  <!-- Pre-loaded picks -->
+
+  <div id="t10-picks-wrap">
+    <div class="t10-best-title" id="t10-picks-title">Top 10 — Best Bets by Edge</div>
+    <div id="t10-picks"></div>
+    <div id="t5-picks"  style="display:none"></div>
+    <div id="t20-picks" style="display:none"></div>
+  </div>
+
+  <!-- Divider -->
+
+  <div style="border-top:1px solid #2a3248;margin:28px 0 20px;"></div>
+
+  <!-- Manual input section -->
+
   <div class="t10-odds-header">
-    <span>Enter book odds — American format (e.g. -120, +150)</span>
-    <button class="t10-calc-btn" onclick="calcTop10()">Calculate Edge ↗</button>
+    <span>Enter your own odds to calculate edge</span>
+    <button class="t10-calc-btn" onclick="calcTop10()">Calculate ↗</button>
   </div>
 
   <div class="t10-input-grid" id="t10-input-grid"></div>
 
-  <!-- Results table -->
+  <!-- Results -->
+
   <div id="t10-results-wrap" style="display:none;">
     <div class="t10-results-header">
       <span class="t10-results-title">Edge Rankings</span>
@@ -1098,14 +1131,13 @@ header { animation-delay:0s; }
       <tbody id="t10-results-body"></tbody>
     </table>
     </div>
-
-    <!-- Best bets summary -->
     <div class="t10-best-wrap" id="t10-best-wrap"></div>
   </div>
 
 </div>
 
 <!-- SPONSORS -->
+
 <div class="sponsors">
   <span class="sponsor">The Hockaday School</span>
   <span class="sponsor" style="color:rgba(201,168,76,0.5);">·</span>
@@ -1140,10 +1172,10 @@ const FIELD = [
     reason:"#1 model score on real data. App +0.97, T2G +2.03 (best in field), Putt +0.66. 2023 champion with elite Augusta SG history — 2nd all-time among non-winners before his win. The clear model pick.",
     signal:"fire", fade:false, topPick:true },
 
-  { name:"Collin Morikawa",   ctry:"USA", score:92, t10:49, t5:26, odds:"+2500",
-    hist:"+ T10 2021",
-    reason:"Best App in entire field (+1.33) AND best T2G (+2.18) — the two stats that predict Augusta wins more than anything else. Putting near zero on Bermuda is fine. +2700 for the statistically best-fit player is the biggest edge on the board.",
-    signal:"fire", fade:false, topPick:true },
+  { name:"Collin Morikawa",   ctry:"USA", score:55, t10:14, t5:7, odds:"+2500",
+    hist:"+ T3 2024 · T10 2021",
+    reason:"⚠️ INJURY FLAG: Withdrew from THE PLAYERS Championship with a back injury sustained on a practice swing. Has not played since. Statistically the best Augusta fit in the field (App +1.33, T2G +2.18) but injury status is completely unknown. DO NOT BET until he confirms he is healthy and playing. If he's 100%, this is the best value on the board. If compromised, he's a liability at any price.",
+    signal:"watch", fade:false, topPick:false },
 
   { name:"Scottie Scheffler", ctry:"USA", score:92, t10:52, t5:30, odds:"+425",
     hist:"+++ 2022W · 2024W · T4 2023 · T4 2025",
@@ -1305,11 +1337,7 @@ const FIELD = [
 
 // ── Model edge calc ──
 // Vig-strip book odds to implied prob, compare to model T10% / outright
-function americanToImpl(odds) {
-  const n = parseInt(odds.replace('+',''));
-  if(odds.startsWith('-')) { const n2=Math.abs(n); return n2/(n2+100); }
-  return 100/(n+100);
-}
+// americanToImpl defined below
 
 function calcEdge(player) {
   const bookImpl = americanToImpl(player.odds);
@@ -1325,45 +1353,64 @@ FIELD.forEach(p => { p.edge = calcEdge(p); });
 FIELD.sort((a,b) => b.score - a.score);
 
 // ── RENDER RANKINGS TABLE ──
-// ── T10 / T5 PICKS DATA ──
+// ── MARKET DATA — Real book odds Apr 3 2026 · All three markets ──
+// ⚠️ Morikawa removed — back injury concern
 const T10_PICKS = [
-  { name:"Collin Morikawa",   odds:"+2500", model_t10:49, book_t10:17, edge_t10:31.3 },
-  { name:"Jon Rahm",          odds:"+1100", model_t10:52, book_t10:38, edge_t10:14.5 },
-  { name:"Si Woo Kim",        odds:"+6700", model_t10:25, book_t10:7,  edge_t10:18.3 },
-  { name:"Hideki Matsuyama",  odds:"+3500", model_t10:27, book_t10:13, edge_t10:14.6 },
-  { name:"Sepp Straka",       odds:"+7000", model_t10:17, book_t10:6,  edge_t10:10.8 },
-  { name:"Adam Scott",        odds:"+8000", model_t10:15, book_t10:6,  edge_t10:9.6  },
-  { name:"Matt Fitzpatrick",  odds:"+2500", model_t10:25, book_t10:17, edge_t10:7.6  },
-  { name:"Patrick Reed",      odds:"+2500", model_t10:25, book_t10:17, edge_t10:7.8  },
+  { name:"Adam Scott",        odds:"+500",  model_t10:27, book_t10:15.4, edge_t10:11.6 },
+  { name:"Sepp Straka",       odds:"+430",  model_t10:28, book_t10:17.5, edge_t10:10.5 },
+  { name:"Si Woo Kim",        odds:"+350",  model_t10:30, book_t10:20.6, edge_t10:9.4  },
+  { name:"Akshay Bhatia",     odds:"+425",  model_t10:25, book_t10:17.6, edge_t10:7.4  },
+  { name:"Cameron Smith",     odds:"+750",  model_t10:18, book_t10:10.9, edge_t10:7.1  },
+  { name:"Russell Henley",    odds:"+375",  model_t10:26, book_t10:19.5, edge_t10:6.5  },
+  { name:"Shane Lowry",       odds:"+425",  model_t10:23, book_t10:17.6, edge_t10:5.4  },
+  { name:"Patrick Reed",      odds:"+300",  model_t10:28, book_t10:23.1, edge_t10:4.9  },
+  { name:"Jordan Spieth",     odds:"+375",  model_t10:23, book_t10:19.5, edge_t10:3.5  },
+  { name:"Sungjae Im",        odds:"+700",  model_t10:15, book_t10:11.6, edge_t10:3.4  },
 ];
 
 const T5_PICKS = [
-  { name:"Collin Morikawa",   odds:"+2500", model_t5:26, book_t5:10, edge_t5:16.5 },
-  { name:"Jon Rahm",          odds:"+1100", model_t5:30, book_t5:21, edge_t5:9.2  },
-  { name:"Si Woo Kim",        odds:"+6700", model_t5:13, book_t5:4,  edge_t5:9.7  },
-  { name:"Hideki Matsuyama",  odds:"+3500", model_t5:14, book_t5:7,  edge_t5:7.3  },
-  { name:"Sepp Straka",       odds:"+7000", model_t5:9,  book_t5:4,  edge_t5:5.7  },
-  { name:"Adam Scott",        odds:"+8000", model_t5:8,  book_t5:3,  edge_t5:5.1  },
-  { name:"Matt Fitzpatrick",  odds:"+2500", model_t5:13, book_t5:10, edge_t5:3.8  },
-  { name:"Patrick Reed",      odds:"+2500", model_t5:13, book_t5:10, edge_t5:3.6  },
+  { name:"Sepp Straka",       odds:"+1200", model_t5:15, book_t5:7.1,  edge_t5:7.9  },
+  { name:"Adam Scott",        odds:"+1300", model_t5:14, book_t5:6.6,  edge_t5:7.4  },
+  { name:"Akshay Bhatia",     odds:"+1200", model_t5:13, book_t5:7.1,  edge_t5:5.9  },
+  { name:"Russell Henley",    odds:"+890",  model_t5:14, book_t5:9.4,  edge_t5:4.6  },
+  { name:"Cameron Smith",     odds:"+2000", model_t5:9,  book_t5:4.4,  edge_t5:4.6  },
+  { name:"Shane Lowry",       odds:"+1100", model_t5:12, book_t5:7.7,  edge_t5:4.3  },
+  { name:"Corey Conners",     odds:"+1500", model_t5:10, book_t5:5.8,  edge_t5:4.2  },
+  { name:"Patrick Reed",      odds:"+700",  model_t5:15, book_t5:11.6, edge_t5:3.4  },
+  { name:"Si Woo Kim",        odds:"+625",  model_t5:16, book_t5:12.8, edge_t5:3.2  },
+  { name:"Jordan Spieth",     odds:"+925",  model_t5:12, book_t5:9.0,  edge_t5:3.0  },
+];
+
+const T20_PICKS = [
+  { name:"Sepp Straka",       odds:"+180",  model_t20:50, book_t20:33.1, edge_t20:16.9 },
+  { name:"Adam Scott",        odds:"+180",  model_t20:49, book_t20:33.1, edge_t20:15.9 },
+  { name:"Matt Fitzpatrick",  odds:"+145",  model_t20:53, book_t20:37.8, edge_t20:15.2 },
+  { name:"Si Woo Kim",        odds:"+125",  model_t20:52, book_t20:41.2, edge_t20:10.8 },
+  { name:"Xander Schauffele", odds:"+180",  model_t20:43, book_t20:33.1, edge_t20:9.9  },
+  { name:"Cameron Young",     odds:"+140",  model_t20:48, book_t20:38.6, edge_t20:9.4  },
+  { name:"Corey Conners",     odds:"+180",  model_t20:42, book_t20:33.1, edge_t20:8.9  },
+  { name:"Shane Lowry",       odds:"+145",  model_t20:45, book_t20:37.8, edge_t20:7.2  },
+  { name:"Russell Henley",    odds:"+125",  model_t20:48, book_t20:41.2, edge_t20:6.8  },
+  { name:"Akshay Bhatia",     odds:"+130",  model_t20:47, book_t20:40.3, edge_t20:6.7  },
 ];
 
 function renderT10T5() {
-  const t10el = document.getElementById('t10-picks');
-  const t5el  = document.getElementById('t5-picks');
+  const t10el  = document.getElementById('t10-picks');
+  const t5el   = document.getElementById('t5-picks');
+  const t20el  = document.getElementById('t20-picks');
 
   function buildRows(picks, edgeKey, mdlKey, bkKey) {
     return picks.map((p, i) => {
       const edge = p[edgeKey];
-      const fire = edge > 10 ? 'fire' : '';
-      const sigClass = edge > 10 ? 'sig-fire' : edge > 5 ? 'sig-good' : 'sig-watch';
-      const sigText  = edge > 10 ? '🔥 Fire' : edge > 5 ? '✓ Value' : '— Watch';
+      const fire = edge >= 6 ? 'fire' : '';
+      const sigClass = edge >= 8 ? 'sig-fire' : edge >= 4 ? 'sig-good' : 'sig-watch';
+      const sigText  = edge >= 8 ? '🔥 Fire' : edge >= 4 ? '✓ Value' : '— Watch';
       return `
       <div class="pick-row ${fire}">
         <span class="pr-rank">${i+1}</span>
-        <div>
+        <div style="flex:1;min-width:120px">
           <div class="pr-name">${p.name}</div>
-          <div class="pr-win">Win: ${p.odds}</div>
+          <div class="pr-win">Odds: ${p.odds}</div>
         </div>
         <div class="pr-stats">
           <div class="pr-stat">
@@ -1371,7 +1418,7 @@ function renderT10T5() {
             <div class="pr-stat-val gold">${p[mdlKey]}%</div>
           </div>
           <div class="pr-stat">
-            <div class="pr-stat-label">Book Est</div>
+            <div class="pr-stat-label">Book</div>
             <div class="pr-stat-val" style="color:#8a9eb8">${p[bkKey]}%</div>
           </div>
           <div class="pr-stat">
@@ -1384,8 +1431,9 @@ function renderT10T5() {
     }).join('');
   }
 
-  t10el.innerHTML = buildRows(T10_PICKS, 'edge_t10', 'model_t10', 'book_t10');
-  t5el.innerHTML  = buildRows(T5_PICKS,  'edge_t5',  'model_t5',  'book_t5');
+  t10el.innerHTML  = buildRows(T10_PICKS, 'edge_t10', 'model_t10', 'book_t10');
+  t5el.innerHTML   = buildRows(T5_PICKS,  'edge_t5',  'model_t5',  'book_t5');
+  t20el.innerHTML  = buildRows(T20_PICKS, 'edge_t20', 'model_t20', 'book_t20');
 }
 
 function renderRankings() {
@@ -1486,13 +1534,13 @@ function renderFades() {
 
 // ── RENDER MATCHUPS ──
 const MATCHUPS = [
-  { type:"Outright Value",  p1:"Collin Morikawa",  p1odds:"+2700", p2:"Xander Schauffele", p2odds:"+1800", pick:1, conf:"⭐⭐⭐", reason:"Real SG data settles this: Morikawa has the best App in field (+1.33) and elite T2G (+2.18). Schauffele's stats are solid but Morikawa is statistically the better Augusta fit. +2700 vs +1600 — take Morikawa every time." },
-  { type:"Outright Value",  p1:"Si Woo Kim",       p1odds:"+6700", p2:"Rory McIlroy",      p2odds:"+1050", pick:1, conf:"⭐⭐⭐", reason:"The biggest model value on the board. Kim's App (+1.12) and T2G (+2.13) are top-3 in the entire field. McIlroy is a great player but +1000 vs +5500 — Kim is 5x the price with nearly identical stat profile. Take Kim." },
-  { type:"Outright Value",  p1:"Adam Scott",       p1odds:"+6500", p2:"Justin Thomas",     p2odds:"+5000", pick:1, conf:"⭐⭐⭐", reason:"Real SG data makes this obvious. Scott has App +1.09, T2G +1.50 and a Masters win. Thomas has App near zero (+0.03) and weak T2G (+0.31) in limited 2026 events. Scott at bigger odds is the clear pick." },
+  { type:"Outright Value",  p1:"Jon Rahm",         p1odds:"+1100", p2:"Xander Schauffele", p2odds:"+1800", pick:1, conf:"⭐⭐⭐", reason:"Rahm has elite App (+0.97), best T2G in field (+2.03), 2023 winner, and deep Augusta IQ. Schauffele's stats are solid but Rahm is statistically the superior Augusta fit and at a better price. Take Rahm." },
+  { type:"Outright Value",  p1:"Si Woo Kim",       p1odds:"+6700", p2:"Rory McIlroy",      p2odds:"+1050", pick:1, conf:"⭐⭐⭐", reason:"The biggest model value on the board. Kim's App (+1.12) and T2G (+2.13) are top-3 in the entire field. McIlroy is a great player but +1050 vs +6700 — Kim is 6x the price with nearly identical stat profile. Take Kim." },
+  { type:"Outright Value",  p1:"Adam Scott",       p1odds:"+8000", p2:"Justin Thomas",     p2odds:"+8500", pick:1, conf:"⭐⭐⭐", reason:"Real SG data makes this obvious. Scott has App +1.09, T2G +1.50 and a Masters win. Thomas has App near zero (+0.03) and weak T2G (+0.31) in limited 2026 events. Scott at the same price is the clear pick." },
   { type:"Outright Value",  p1:"Sepp Straka",      p1odds:"+7000", p2:"Brooks Koepka",     p2odds:"+3500", pick:1, conf:"⭐⭐",   reason:"Straka's real SG data is a revelation — App +1.00, T2G +1.69, both elite. Koepka has good App (+0.99) but putting is terrible (-0.51). Straka at 2x the odds with equivalent or better stats is the value play." },
-  { type:"Outright Value",  p1:"Russell Henley",   p1odds:"+6700", p2:"Patrick Cantlay",   p2odds:"+5500", pick:1, conf:"⭐⭐",   reason:"Same price, massively different Augusta fit. Henley is the best putter in the field (+0.78) and Augusta Bermuda putting data says this matters enormously. Henley's App and T2G are also stronger. Take Henley at the same price." },
-  { type:"Fade Match",      p1:"Robert MacIntyre", p1odds:"+4500", p2:"Jon Rahm",          p2odds:"+1100", pick:2, conf:"⭐⭐⭐", reason:"MacIntyre's real SG data confirms our fade — App is NEGATIVE (-0.30). Augusta's #1 predictor is approach play and he ranks near bottom. Rahm at +1200 has elite App (+0.97), T2G (+2.03), and won in 2023. MacIntyre at +3500 is a trap." },
-  { type:"Fade Match",      p1:"Dustin Johnson",   p1odds:"+10000",p2:"Collin Morikawa",   p2odds:"+2500", pick:2, conf:"⭐⭐",   reason:"Johnson's 2026 SG is shocking — App negative (-0.72), T2G negative (-0.48). Form is gone. Even as a former champion at +12500 the stat profile doesn't support it vs. Morikawa's elite numbers at +2700." },
+  { type:"Outright Value",  p1:"Russell Henley",   p1odds:"+6000", p2:"Patrick Cantlay",   p2odds:"+7000", pick:1, conf:"⭐⭐",   reason:"Best putter in the field (+0.78) and Augusta Bermuda putting data says this matters enormously. Henley's App and T2G are also stronger than Cantlay's. Take Henley at slightly shorter odds." },
+  { type:"Fade Match",      p1:"Robert MacIntyre", p1odds:"+4500", p2:"Jon Rahm",          p2odds:"+1100", pick:2, conf:"⭐⭐⭐", reason:"MacIntyre's real SG data confirms our fade — App is NEGATIVE (-0.30). Augusta's #1 predictor is approach play and he ranks near bottom. Rahm at +1100 has elite App (+0.97), T2G (+2.03), and won in 2023. MacIntyre is a trap." },
+  { type:"Fade Match",      p1:"Dustin Johnson",   p1odds:"+10000",p2:"Adam Scott",        p2odds:"+8000", pick:2, conf:"⭐⭐",   reason:"Johnson's 2026 SG is shocking — App negative (-0.72), T2G negative (-0.48). Form is gone. Even as a former champion at +10000 the stat profile doesn't support it vs. Scott's elite approach numbers at similar odds." },
 ];
 
 function renderMatchups() {
@@ -1556,9 +1604,16 @@ let currentMarket = 't10';
 function setMarket(mkt) {
   currentMarket = mkt;
   document.getElementById('btn-t10').classList.toggle('active', mkt === 't10');
-  document.getElementById('btn-t5').classList.toggle('active', mkt === 't5');
-  document.getElementById('t10-col-mdl').textContent = mkt === 't10' ? 'Mdl T10%' : 'Mdl T5%';
-  // Clear results when switching
+  document.getElementById('btn-t5').classList.toggle('active',  mkt === 't5');
+  document.getElementById('btn-t20').classList.toggle('active', mkt === 't20');
+  document.getElementById('t10-col-mdl').textContent =
+    mkt === 't10' ? 'Mdl T10%' : mkt === 't5' ? 'Mdl T5%' : 'Mdl T20%';
+  // Show correct pre-loaded picks
+  document.getElementById('t10-picks').style.display  = mkt === 't10' ? '' : 'none';
+  document.getElementById('t5-picks').style.display   = mkt === 't5'  ? '' : 'none';
+  document.getElementById('t20-picks').style.display  = mkt === 't20' ? '' : 'none';
+  const titles = {t10:'Top 10 — Best Bets by Edge', t5:'Top 5 — Best Bets by Edge', t20:'Top 20 — Best Bets by Edge'};
+  document.getElementById('t10-picks-title').textContent = titles[mkt];
   document.getElementById('t10-results-wrap').style.display = 'none';
 }
 
@@ -1700,5 +1755,6 @@ renderMatchups();
 renderT10T5();
 buildTop10Inputs();
 </script>
+
 </body>
 </html>
